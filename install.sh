@@ -11,3 +11,4 @@ cd ~/.ycpedef_checker_source
 git pull origin master
 
 sh ./copy.sh
+chmod 777 /usr/local/bin/checker

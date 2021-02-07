@@ -2,4 +2,4 @@
 bash ./compile.sh
 echo "move file ..."
 #cp fastchecker ~/bin/fastchecker
-cp checker ~/bin/checker
+cp checker /usr/local/bin/checker
