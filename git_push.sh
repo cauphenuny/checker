@@ -1,4 +1,5 @@
 #!/bin/sh
+./checker -v > version.log
 echo "git add ."
 git add .
 date +"%F_%T" | xargs -t git commit -m
