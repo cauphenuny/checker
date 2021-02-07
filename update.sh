@@ -1,0 +1,1 @@
+sh copy.sh
