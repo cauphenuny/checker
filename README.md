@@ -1,7 +1,7 @@
 # checker
 A useful checker for OI
 
-```sh
+```
 usage:
 
 checker [$problem_name] [-v] [-l] [-c] [-q] [-f]
