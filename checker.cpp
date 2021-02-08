@@ -192,12 +192,6 @@ void start_update() {
     exit(0);
 }
 
-void forced_update() {
-    //run("cd ~/.ycpedef_checker_source");
-    //run("rm -rf readline/ checker checker.cpp color.h copy.sh create.sh compile.sh git_push.sh install.sh release.sh README.md update.sh");
-    start_update();
-}
-
 void usage() {
     puts("usage: ");
     puts("\nchecker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]\n");
@@ -228,7 +222,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': forced_update(); break;
+            case 'u': puts("start update ..."); start_update(); break;
             default: usage(); break;
         }
     }
@@ -476,16 +470,14 @@ int main(int argc, char *argv[]) {
                 puts("open file...");
                 if (run("vim " + in)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err342;
                 }
+                goto err342;
             } else if (c == 'd') {
                 puts("open file...");
                 if (run("vim -d" + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err342;
                 }
+                goto err342;
             }
         }
         if (time1 > timelimit || time2 > timelimit) {
@@ -513,16 +505,14 @@ int main(int argc, char *argv[]) {
                 puts("open file...");
                 if (run("vim " + in)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err370;
                 }
+                goto err370;
             } else if (c == 'd') {
                 puts("open file...");
                 if (run("vim -d" + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err370;
                 }
+                goto err370;
             }
         }
         if (run("diff " + out + " " + ans + " > " + res)) {
@@ -550,16 +540,14 @@ int main(int argc, char *argv[]) {
                 puts("open file...");
                 if (run("vim " + in)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err395;
                 }
+                goto err395;
             } else if (c == 'd') {
                 puts("open file...");
                 if (run("vim -d" + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
-                } else {
-                    goto err395;
                 }
+                goto err395;
             }
         }
         printf(L_GREEN"\n#%d Accepted.\n" NONE, i);
