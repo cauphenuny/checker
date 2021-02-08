@@ -26,7 +26,6 @@ rm -rf ~/.ycpedef_checker_source/
 mkdir -p ~/.ycpedef_checker_source/
 cp -r ./ ~/.ycpedef_checker_source/
 cd ~/.ycpedef_checker_source/
-git pull gitee master 1>/dev/null 2>/dev/null
 
 echo "copy file ..."
 sudo sh ./copy.sh
