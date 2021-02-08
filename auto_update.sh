@@ -1,5 +1,6 @@
 #!/bin/sh
 # echo "delete file ..."
+killall checker
 if [ -f ~/.ycpedef_checker_buffer ]; then
     rm -rf ~/.ycpedef_checker_buffer/
 fi
@@ -15,7 +16,6 @@ cp -r checker/ ~/.ycpedef_checker_source 1>/dev/null 2>&1
 cd ~/.ycpedef_checker_source 1>/dev/null 2>&1
 
 # echo "move file ..."
-killall checker
 if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
     ~/.ycpedef_checker_source/copy.sh
 fi
