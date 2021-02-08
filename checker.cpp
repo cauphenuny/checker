@@ -11,18 +11,18 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include "color.h"
-#include <readline/history.h>
-#include <readline/readline.h>
+//#include <readline/history.h>
+//#include <readline/readline.h>
 using namespace std;
 
 string __version = "zzm ak ioi v5.3";
 
-//string readline(string prompt) {
-//    printf("%s", prompt.c_str());
-//    string res;
-//    cin >> res;
-//    return res;
-//}
+string readline(string prompt) {
+    printf("%s", prompt.c_str());
+    string res;
+    cin >> res;
+    return res;
+}
 
 long long myclock() {
     struct timeval tv;
