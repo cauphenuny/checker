@@ -188,8 +188,10 @@ void auto_update() {
 
 void start_update() {
     signal(SIGTERM, normal_exit);
-    run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
+    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
+        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
+    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
+        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(auto_update);
     exit(0);
 }
@@ -200,8 +202,10 @@ void forced_update() {
 
 void start_forced_update() {
     signal(SIGTERM, normal_exit);
-    run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
+    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
+        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
+    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
+        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(forced_update);
     exit(0);
 }
@@ -488,7 +492,7 @@ int main(int argc, char *argv[]) {
                 goto err342;
             } else if (c == 'd') {
                 puts("open file...");
-                if (run("vim -d" + out + ans)) {
+                if (run("vim -d " + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
                 }
                 goto err342;
@@ -523,7 +527,7 @@ int main(int argc, char *argv[]) {
                 goto err370;
             } else if (c == 'd') {
                 puts("open file...");
-                if (run("vim -d" + out + ans)) {
+                if (run("vim -d " + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
                 }
                 goto err370;
@@ -558,7 +562,7 @@ int main(int argc, char *argv[]) {
                 goto err395;
             } else if (c == 'd') {
                 puts("open file...");
-                if (run("vim -d" + out + ans)) {
+                if (run("vim -d " + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
                 }
                 goto err395;
