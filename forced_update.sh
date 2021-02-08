@@ -19,3 +19,4 @@ if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
     ~/.ycpedef_checker_source/copy.sh
 fi
 
+rm -rf ~/.ycpedef_checker_source 1>/dev/null 2>&1
