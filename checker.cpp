@@ -178,10 +178,6 @@ void auto_update() {
 
 void start_update() {
     signal(SIGTERM, normal_exit);
-    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(auto_update);
     exit(0);
 }
@@ -192,10 +188,6 @@ void forced_update() {
 
 void start_forced_update() {
     signal(SIGTERM, normal_exit);
-    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(forced_update);
     exit(0);
 }
