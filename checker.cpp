@@ -15,7 +15,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.4.0";
+string __version = "checker v5.4.1";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
