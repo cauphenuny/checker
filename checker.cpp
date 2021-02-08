@@ -102,6 +102,8 @@ void delline() {
 string global_result = "";
 int global_time1 = 0, global_time2 = 0;
 
+void start_update();
+
 void quit(int signum) {
     system("clear");
     int ac = 0, wa = 0, tle = 0, re = 0, eflag = 0;
@@ -142,7 +144,8 @@ void quit(int signum) {
     printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
-    exit(signum);
+    start_update();
+    exit(0);
 }
 
 void register_signal() {
@@ -172,11 +175,6 @@ char answer_pause() {
     return c;
 }
 
-void upd() {
-    run("./update.sh");
-    run("rm ./update.sh");
-}
-
 void normal_exit(int signum) {
     exit(0);
 }
@@ -189,9 +187,13 @@ void update() {
     run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> update.sh");
     run("echo \"sh copy.sh\" >> update.sh");
     run("chmod +x update.sh");
+    run("./update.sh");
     //puts("run this command\n\n    ./update.sh\n\nto update");
+}
+
+void start_update() {
     signal(SIGTERM, normal_exit);
-    atexit(upd);
+    atexit(update);
     exit(0);
 }
 
@@ -223,7 +225,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': update(); break;
+            case 'u': start_update(); break;
             default: usage(); break;
         }
     }
