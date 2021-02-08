@@ -15,7 +15,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.3.2";
+string __version = "checker v5.4.0";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
@@ -159,7 +159,7 @@ void register_signal() {
 bool always_load, always_continue, always_quit, fast_mode;
 
 char judge_pause() {
-    puts(NONE GRAY"\n(press c to continue, r to rejudge, q to quit)" NONE);
+    puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
     char c;
     if (always_continue) return 'c';
     if (always_quit) return 'q';
@@ -168,12 +168,12 @@ char judge_pause() {
 }
 
 char answer_pause() {
-    puts(NONE GRAY"\n(press c to continue, r to rejudge, q to quit)" NONE);
-    puts(NONE GRAY"(press f to check file)" NONE);
+    puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
+    puts(NONE GRAY"(press [i] to check input file, [d] to diff output file)" NONE);
     char c;
     if (always_continue) return 'c';
     if (always_quit) return 'q';
-    while (c = getchar(), c != 'c' && c != 'q' && c != 'r' && c != 'f');
+    while (c = getchar(), c != 'c' && c != 'q' && c != 'r' && c != 'i' && c != 'd');
     return c;
 }
 
@@ -466,15 +466,22 @@ int main(int argc, char *argv[]) {
             if (c == 'c') {
                 puts("continue...");
                 continue;
-            } else if (c == 'q'){
+            } else if (c == 'q') {
                 puts("quit.");
                 quit(0);
-            } else if (c == 'r'){
+            } else if (c == 'r') {
                 puts("\nrejudge...");
                 goto judge;
-            } else if (c == 'f'){
+            } else if (c == 'i') {
                 puts("open file...");
                 if (run("vim " + in)) {
+                    puts(L_RED"\nFailed. Install vim and try again.\n");
+                } else {
+                    goto err342;
+                }
+            } else if (c == 'd') {
+                puts("open file...");
+                if (run("vim -d" + out + ans)) {
                     puts(L_RED"\nFailed. Install vim and try again.\n");
                 } else {
                     goto err342;
@@ -502,10 +509,20 @@ int main(int argc, char *argv[]) {
             } else if (c == 'r'){
                 puts("\nrejudge...");
                 goto judge;
-            } else if (c == 'f'){
+            } else if (c == 'i') {
                 puts("open file...");
-                run("vim " + in);
-                goto err370;
+                if (run("vim " + in)) {
+                    puts(L_RED"\nFailed. Install vim and try again.\n");
+                } else {
+                    goto err370;
+                }
+            } else if (c == 'd') {
+                puts("open file...");
+                if (run("vim -d" + out + ans)) {
+                    puts(L_RED"\nFailed. Install vim and try again.\n");
+                } else {
+                    goto err370;
+                }
             }
         }
         if (run("diff " + out + " " + ans + " > " + res)) {
@@ -529,10 +546,17 @@ int main(int argc, char *argv[]) {
             } else if (c == 'r'){
                 puts("\nrejudge...");
                 goto judge;
-            } else if (c == 'f'){
+            } else if (c == 'i') {
                 puts("open file...");
-                if (run("vim -O " + in + out + ans + res)) {
-                    printf(L_RED "Failed. Install Vim and try again.\n");
+                if (run("vim " + in)) {
+                    puts(L_RED"\nFailed. Install vim and try again.\n");
+                } else {
+                    goto err395;
+                }
+            } else if (c == 'd') {
+                puts("open file...");
+                if (run("vim -d" + out + ans)) {
+                    puts(L_RED"\nFailed. Install vim and try again.\n");
                 } else {
                     goto err395;
                 }
