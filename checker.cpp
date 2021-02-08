@@ -145,7 +145,7 @@ void quit(int signum) {
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
     printf(BOLD UNDERLINE "%s" NONE, __version.c_str());
-    printf("    (compiled at %s %s)\n", __TIME__, __DATE__);
+    printf(", compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
 }
