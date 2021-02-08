@@ -217,12 +217,14 @@ void usage() {
     puts("-u: update");
     printf("\n" BOLD UNDERLINE "%s" NONE"        (by ycp)\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
+    start_update();
     exit(0);
 }
 
 void check_version() {
     printf(BOLD UNDERLINE "%s" NONE "        (by ycp)\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
+    start_update();
     exit(0);
 }
 
