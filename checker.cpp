@@ -1,5 +1,8 @@
-// author: ycpedef | https://ycpedef.github.io
-// email: ycpedef@foxmail.com
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * author: ycpedef | https://ycpedef.github.io   *
+ * email: ycpedef@foxmail.com                    *
+ * Copyright ycpedef 2020-2021.                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <cstdio>
 #include <iostream>
 #include <ctime>
