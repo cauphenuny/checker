@@ -19,7 +19,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "czj love oyyc v5.5.1";
+string __version = "czj love oyyc v5.5.2";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
