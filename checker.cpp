@@ -15,7 +15,7 @@
 #include <readline/readline.h>
 using namespace std;
 
-string __version = "fucker v5.3";
+string __version = "zzm ak ioi v5.3";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
