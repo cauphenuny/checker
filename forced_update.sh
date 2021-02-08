@@ -12,4 +12,3 @@ killall checker
 if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
     ~/.ycpedef_checker_source/copy.sh
 fi
-
