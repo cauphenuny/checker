@@ -15,7 +15,7 @@
 #include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.3 [dev]";
+string __version = "checker v5.3";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -192,7 +192,7 @@ void update() {
     run("echo \"git init\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"git remote add origin https://github.com/ycpedef/checker\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"sh copy.sh\" >> ~/.ycpedef_checker_update/update.sh");
+    run("echo \"bash copy.sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("chmod +x ~/.ycpedef_checker_update/update.sh");
     //run("~/.ycpedef_checker_update/update.sh");
 }
