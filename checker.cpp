@@ -172,6 +172,11 @@ char answer_pause() {
     return c;
 }
 
+void upd() {
+    run("./update.sh");
+    run("rm ./update.sh");
+}
+
 void update() {
     run("rm ./update.sh");
     run("echo \"#!/bin/sh\" >> update.sh");
@@ -180,7 +185,8 @@ void update() {
     run("echo \"git pull origin master\" >> update.sh");
     run("echo \"sh copy.sh\" >> update.sh");
     run("chmod +x update.sh");
-    puts("run this command\n\n    ./update.sh\n\nto update");
+    //puts("run this command\n\n    ./update.sh\n\nto update");
+    atexit(upd);
     exit(0);
 }
 
