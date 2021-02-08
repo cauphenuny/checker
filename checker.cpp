@@ -19,7 +19,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "Chaos1018 loves oyyc v5.5.4";
+string __version = "checker v5.5.4";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
