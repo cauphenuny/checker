@@ -201,8 +201,8 @@ void start_update() {
 }
 
 void forced_update() {
-    run("cd ~/.ycpedef_checker_source");
-    run("rm -rf readline/ checker checker.cpp color.h copy.sh create.sh compile.sh git_push.sh install.sh release.sh README.md update.sh");
+    //run("cd ~/.ycpedef_checker_source");
+    //run("rm -rf readline/ checker checker.cpp color.h copy.sh create.sh compile.sh git_push.sh install.sh release.sh README.md update.sh");
     start_update();
 }
 
@@ -214,7 +214,7 @@ void usage() {
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occors");
     puts("-v: check version and quit");
-    puts("-u: forced update");
+    puts("-u: update");
     printf("\n" BOLD UNDERLINE "%s" NONE"        (by ycp)\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     exit(0);
