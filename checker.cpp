@@ -177,15 +177,20 @@ void upd() {
     run("rm ./update.sh");
 }
 
+void normal_exit(int signum) {
+    exit(0);
+}
+
 void update() {
     run("rm ./update.sh");
     run("echo \"#!/bin/sh\" >> update.sh");
     run("echo \"killall checker\" >> update.sh");
     run("echo \"cd ~/.ycpedef_checker_source\" >> update.sh");
-    run("echo \"git pull origin master\" >> update.sh");
+    run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> update.sh");
     run("echo \"sh copy.sh\" >> update.sh");
     run("chmod +x update.sh");
     //puts("run this command\n\n    ./update.sh\n\nto update");
+    signal(SIGTERM, normal_exit);
     atexit(upd);
     exit(0);
 }
