@@ -1,4 +1,5 @@
-// Copyright ycp 2020-2021.
+// author: ycpedef | https://ycpedef.github.io
+// email: ycpedef@foxmail.com
 #include <cstdio>
 #include <iostream>
 #include <ctime>

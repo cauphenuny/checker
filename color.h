@@ -1,4 +1,3 @@
-#define NONE                 "\e[0m"
 #define BLACK                "\e[0;30m"
 #define L_BLACK              "\e[1;30m"
 #define RED                  "\e[0;31m"
@@ -22,4 +21,5 @@
 #define HIDE                 "\e[8m"
 #define CLEAR                "\e[2J"
 #define CLRLINE              "\r\e[K"
+#define NONE                 "\e[0m"
 

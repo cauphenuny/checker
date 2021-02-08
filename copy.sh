@@ -1,3 +1,2 @@
-#!/bin/bash
-# echo "updated checker."
-cp ./checker /usr/local/bin/checker 2>/dev/null
+#!/bin/sh
+cp ./checker /usr/local/bin/checker 2>/dev/null 1>&2
