@@ -15,7 +15,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "ysh ak ioi v5.3";
+string __version = "ysh txdy!! v5.3";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
