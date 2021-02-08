@@ -3,7 +3,7 @@ A useful checker for OI
 
 ## install
 ```bash
-sudo ./install.sh
+./install.sh
 checker -h
 ```
 
