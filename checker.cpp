@@ -200,6 +200,11 @@ void start_update() {
     exit(0);
 }
 
+void forced_update() {
+    run("rm -rf ~/.ycpedef_checker_source");
+    start_update();
+}
+
 void usage() {
     puts("usage: ");
     puts("\nchecker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]\n");
@@ -208,7 +213,7 @@ void usage() {
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occors");
     puts("-v: check version and quit");
-    puts("-u: update");
+    puts("-u: forced update");
     printf("\n" BOLD UNDERLINE "%s" NONE"        (by ycp)\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     exit(0);
@@ -228,7 +233,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': start_update(); break;
+            case 'u': forced_update(); break;
             default: usage(); break;
         }
     }
