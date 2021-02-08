@@ -110,31 +110,17 @@ void quit(int signum) {
     for (int i = 0, len = global_result.length(); i < len; i++) {
         switch (global_result[i]) {
             case 'a':
-                ac++;
-                break;
+                ac++; break;
             case 'w':
-                wa++;
-                printf("#%d "  "Wrong Answer\n" NONE, i + 1);
-                eflag = 1;
-                break;
+                wa++; printf("#%d "  "Wrong Answer\n" NONE, i + 1); eflag = 1; break;
             case 't':
-                tle++;
-                printf("#%d "  "Time Limit Exceeded\n" NONE, i + 1);
-                eflag = 1;
-                break;
+                tle++; printf("#%d "  "Time Limit Exceeded\n" NONE, i + 1); eflag = 1; break;
             case 'r':
-                re++;
-                printf("#%d " "Runtime Error\n" NONE, i + 1);
-                eflag = 1;
-                break;
+                re++; printf("#%d " "Runtime Error\n" NONE, i + 1); eflag = 1; break;
             case 'd':
-                printf("#%d " "Data Error\n" NONE, i + 1);
-                eflag = 1;
-                break;
+                printf("#%d " "Data Error\n" NONE, i + 1); eflag = 1; break;
             case 'e':
-                printf("#%d " "No Executable Program\n" NONE, i + 1);
-                eflag = 1;
-                break;
+                printf("#%d " "No Executable Program\n" NONE, i + 1); eflag = 1; break;
         }
     }
     if (eflag) puts("");
