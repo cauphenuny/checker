@@ -198,7 +198,7 @@ void forced_update() {
     run("~/.ycpedef_checker_update/forced_update.sh");
 }
 
-void forced_update() {
+void start_forced_update() {
     signal(SIGTERM, normal_exit);
     run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
     run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
@@ -236,7 +236,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': puts("start update ..."); start_update(); break;
+            case 'u': puts("start update ..."); start_forced_update(); break;
             default: usage(); break;
         }
     }
