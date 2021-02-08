@@ -184,17 +184,9 @@ void normal_exit(int signum) {
 void update() {
     run("rm -rf ~/.ycpedef_checker_update 1> /dev/null 2> /dev/null");
     run("mkdir -p ~/.ycpedef_checker_update");
-    run("echo \"#!/bin/sh\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"killall checker\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"rm -rf ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"mkdir -p ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"cd ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"git init\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"git remote add origin https://github.com/ycpedef/checker\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"bash copy.sh\" >> ~/.ycpedef_checker_update/update.sh");
+    run("cp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_update/update.sh");
     run("chmod +x ~/.ycpedef_checker_update/update.sh");
-    //run("~/.ycpedef_checker_update/update.sh");
+    run("~/.ycpedef_checker_update/update.sh");
 }
 
 void start_update() {
