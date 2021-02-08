@@ -19,7 +19,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.4.3";
+string __version = "czj love oyyc v5.4.3";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
@@ -209,14 +209,14 @@ void usage() {
     puts("-q: always quit when error occors");
     puts("-v: check version and quit");
     puts("-u: update");
-    printf("\n" BOLD UNDERLINE "%s" NONE"        (by ycp)\n", __version.c_str());
+    printf("\n" BOLD UNDERLINE "%s" NONE"\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
 }
 
 void check_version() {
-    printf(BOLD UNDERLINE "%s" NONE "        (by ycp)\n", __version.c_str());
+    printf(BOLD UNDERLINE "%s" NONE "\n", __version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     exit(0);
 }
