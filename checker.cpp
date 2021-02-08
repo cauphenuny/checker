@@ -202,7 +202,7 @@ void start_update() {
 
 void forced_update() {
     run("cd ~/.ycpedef_checker_source");
-    run("rm -rf readline/ checker checker.cpp color.h copy.sh create.sh compile.sh git_push.sh install.sh release.sh README.md update.sh")
+    run("rm -rf readline/ checker checker.cpp color.h copy.sh create.sh compile.sh git_push.sh install.sh release.sh README.md update.sh");
     start_update();
 }
 
