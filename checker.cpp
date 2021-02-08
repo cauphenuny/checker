@@ -181,14 +181,28 @@ void normal_exit(int signum) {
     exit(0);
 }
 
-void update() {
+void auto_update() {
     //run("rm -rf ~/.ycpedef_checker_update 1> /dev/null 2> /dev/null");
-    run("~/.ycpedef_checker_update/update.sh");
+    run("~/.ycpedef_checker_update/auto_update.sh");
 }
 
 void start_update() {
     signal(SIGTERM, normal_exit);
-    atexit(update);
+    run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
+    run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
+    atexit(auto_update);
+    exit(0);
+}
+
+void forced_update() {
+    run("~/.ycpedef_checker_update/forced_update.sh");
+}
+
+void forced_update() {
+    signal(SIGTERM, normal_exit);
+    run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
+    run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
+    atexit(forced_update);
     exit(0);
 }
 

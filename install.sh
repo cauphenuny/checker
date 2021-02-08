@@ -30,5 +30,7 @@ echo "copy file ..."
 sudo sh ./copy.sh
 sudo chmod 777 /usr/local/bin/checker
 mkdir -p ~/.ycpedef_checker_update
-cp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_update/update.sh
-sudo chmod 777 ~/.ycpedef_checker_update/update.sh
+cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh
+cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh
+sudo chmod 777 ~/.ycpedef_checker_update/auto_update.sh
+sudo chmod 777 ~/.ycpedef_checker_update/forced_update.sh
