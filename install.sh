@@ -29,3 +29,6 @@ git pull origin master 1>/dev/null 2>/dev/null
 echo "copy file ..."
 sh ./copy.sh
 chmod 777 /usr/local/bin/checker
+mkdir -p ~/.ycpedef_checker_update
+cp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_update/update.sh
+chmod +x ~/.ycpedef_checker_update/update.sh

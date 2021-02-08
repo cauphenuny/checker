@@ -182,10 +182,7 @@ void normal_exit(int signum) {
 }
 
 void update() {
-    run("rm -rf ~/.ycpedef_checker_update 1> /dev/null 2> /dev/null");
-    run("mkdir -p ~/.ycpedef_checker_update");
-    run("cp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_update/update.sh");
-    run("chmod +x ~/.ycpedef_checker_update/update.sh");
+    //run("rm -rf ~/.ycpedef_checker_update 1> /dev/null 2> /dev/null");
     run("~/.ycpedef_checker_update/update.sh");
 }
 
