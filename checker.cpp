@@ -246,7 +246,6 @@ int main(int argc, char *argv[]) {
     string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
     int T, timelimit;
     if (argc >= 2) {
-        prob = argv[1];
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
                 if (!prof) prob = argv[i], prof = 1;
@@ -255,9 +254,8 @@ int main(int argc, char *argv[]) {
                 load_cmd(argv[i]);
             }
         }
-    } else {
-        do prob = readline("name of the problem: "); while (prob == "");
     }
+    while(prob == "") prob = readline("name of the problem: ");
     if (access(".data", F_OK) != 0 || !isdir(".data"))
         if (system("mkdir .data")) bash_fail();
     if (access(".config", F_OK) != 0 || !isdir(".config"))
