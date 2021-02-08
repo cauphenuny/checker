@@ -1,17 +1,17 @@
 #!/bin/sh
 echo "delete file ..."
-killall checkerg
-rm -rf ~/.ycpedef_checker_buffer/g
-rm -rf ~/.ycpedef_checker_sourceg
-mkdir -p ~/.ycpedef_checker_sourceg
-mkdir -p ~/.ycpedef_checker_bufferg
+killall checker
+rm -rf ~/.ycpedef_checker_buffer/
+rm -rf ~/.ycpedef_checker_source
+mkdir -p ~/.ycpedef_checker_source
+mkdir -p ~/.ycpedef_checker_buffer
 
 echo "download file ..."
-cd ~/.ycpedef_checker_bufferg
-wget https://gitee.com/yuanchenpu/checker/repository/archive/master.zipg
-unzip master.zipg
-cp -r checker/ ~/.ycpedef_checker_sourceg
-cd ~/.ycpedef_checker_sourceg
+cd ~/.ycpedef_checker_buffer
+wget https://gitee.com/yuanchenpu/checker/repository/archive/master.zip
+unzip master.zip
+cp -r checker/ ~/.ycpedef_checker_source
+cd ~/.ycpedef_checker_source
 
 echo "move file ..."
 if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
