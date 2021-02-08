@@ -9,7 +9,6 @@ checker -h
 
 ## usage:
 ```
-
 checker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]
 
 -f: fast mode
