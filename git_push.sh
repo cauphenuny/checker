@@ -1,5 +1,5 @@
 #!/bin/sh
-./compile.sh
+#./compile.sh
 echo "git add ."
 git add .
 date +"%F_%T" | xargs -t git commit -m

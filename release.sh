@@ -1,5 +1,6 @@
 #!/bin/bash
-bash ./compile.sh
-echo "move file ..."
-#cp fastchecker ~/bin/fastchecker
-cp checker /usr/local/bin/checker
+#list="checker.cpp checker color.h compile.sh install.sh"
+#echo $list
+zip -q -r checker$1.zip ./
+echo "------"
+ls --color=auto

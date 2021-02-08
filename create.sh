@@ -1,6 +1,5 @@
 #!/bin/bash
-list="readline/ checker.cpp checker color.h compile.sh install.sh"
-echo $list
-zip -q -r checker$1.zip $list
-echo "------"
-ls --color=auto
+bash ./compile.sh
+echo "move file ..."
+#cp fastchecker ~/bin/fastchecker
+cp checker /usr/local/bin/checker
