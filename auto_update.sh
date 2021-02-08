@@ -2,10 +2,8 @@
 killall checker
 rm -rf ~/.ycpedef_checker_source
 mkdir -p ~/.ycpedef_checker_source
+git clone https://gitee.com/ycpedef/checker ~/.ycpedef_checker_source 1> /dev/null 2>&1
 cd ~/.ycpedef_checker_source
-git init 1> /dev/null 2>&1
-git remote add origin https://gitee.com/ycpedef/checker 1> /dev/null 2>&1
-git pull origin master 1> /dev/null 2> /dev/null
 if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
     ~/.ycpedef_checker_source/copy.sh
 fi
