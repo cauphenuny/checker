@@ -22,8 +22,10 @@ echo "installing git ..."
 sudo apt install -y git 1>/dev/null 2>/dev/null
 
 echo "download file ..."
-cp -r ./ ~/.ycpedef_checker_source
-cd ~/.ycpedef_checker_source
+rm -rf ~/.ycpedef_checker_source/
+mkdir -p ~/.ycpedef_checker_source/
+cp -r ./ ~/.ycpedef_checker_source/
+cd ~/.ycpedef_checker_source/
 git pull origin master 1>/dev/null 2>/dev/null
 
 echo "copy file ..."
