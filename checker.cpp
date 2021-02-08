@@ -185,6 +185,7 @@ void update() {
     run("echo \"#!/bin/sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"killall checker\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"cd ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
+    run("echo \"rm checker install.sh checker.cpp update.sh release.sh create.sh compile.sh git_push.sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"sh copy.sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("chmod +x ~/.ycpedef_checker_update/update.sh");
