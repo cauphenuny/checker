@@ -1,4 +1,5 @@
 #!/bin/sh
+./compile.sh
 ./checker -v > version.log
 echo "git add ."
 git add .

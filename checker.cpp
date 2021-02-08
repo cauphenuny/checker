@@ -15,7 +15,7 @@
 #include "readline/readline.h"
 using namespace std;
 
-string __version = "checker v5.4";
+string __version = "checker v5.3";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -173,13 +173,14 @@ char answer_pause() {
 }
 
 void update() {
-    run("echo \"#!/bin/sh\" > update.sh");
-    run("echo \"killall checker\" > update.sh");
-    run("echo \"cd ~/.ycpedef_checker_source\" > update.sh");
-    run("echo \"git pull origin master\" > update.sh");
-    run("echo \"sh copy.sh\" > update.sh");
+    run("rm ./update.sh");
+    run("echo \"#!/bin/sh\" >> update.sh");
+    run("echo \"killall checker\" >> update.sh");
+    run("echo \"cd ~/.ycpedef_checker_source\" >> update.sh");
+    run("echo \"git pull origin master\" >> update.sh");
+    run("echo \"sh copy.sh\" >> update.sh");
     run("chmod +x update.sh");
-    run("./update.sh");
+    puts("run this command\n\n    ./update.sh\n\nto update");
     exit(0);
 }
 
