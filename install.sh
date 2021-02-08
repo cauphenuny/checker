@@ -1,17 +1,17 @@
 #!/bin/sh
 if [ -f  /bin/checker ]; then
     echo "Warning: remove /bin/checker"
-    rm /bin/checker
+    sudo rm /bin/checker
 fi
 
 if [ -f  /usr/bin/checker ]; then
     echo "Warning: remove /usr/bin/checker"
-    rm /usr/bin/checker
+    sudo rm /usr/bin/checker
 fi
 
 if [ -f  /usr/local/bin/checker ]; then
     echo "Warning: remove /usr/local/bin/checker"
-    rm /usr/local/bin/checker
+    sudo rm /usr/local/bin/checker
 fi
 
 if [ -f ~/.ycpedef_checker_source ]; then
