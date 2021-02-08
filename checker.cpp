@@ -181,7 +181,7 @@ void normal_exit(int signum) {
 
 void update() {
     run("rm -rf ~/.ycpedef_checker_update 1> /dev/null 2> /dev/null");
-    rum("mkdir -p ~/.ycpedef_checker_update")
+    run("mkdir -p ~/.ycpedef_checker_update");
     run("echo \"#!/bin/sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"killall checker\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"cd ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
