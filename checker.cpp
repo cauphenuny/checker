@@ -459,8 +459,8 @@ int main(int argc, char *argv[]) {
         if (errorflag == 2) printf(NONE"time2: %lldms (return %d)\n", b_time - a_time, WEXITSTATUS(ret));
         else printf(NONE"\n" NONE"time2: %lldms\n", b_time - a_time);
         if (errorflag) {
-            err342:
             printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            err342:
             if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
@@ -489,8 +489,8 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            err370:
             printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            err370:
             if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
@@ -516,8 +516,8 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            err395:
             printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            err395:
             if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
