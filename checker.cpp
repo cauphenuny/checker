@@ -187,7 +187,7 @@ void update() {
     run("echo \"#!/bin/sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"killall checker\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"cd ~/.ycpedef_checker_source\" >> ~/.ycpedef_checker_update/update.sh");
-    run("echo \"rm ~/.ycpedef_checker_source/checker ~/.ycpedef_checker_source/install.sh ~/.ycpedef_checker_source/checker.cpp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_source/release.sh ~/.ycpedef_checker_source/create.sh ~/.ycpedef_checker_source/compile.sh ~/.ycpedef_checker_source/git_push.sh\" >> ~/.ycpedef_checker_update/update.sh");
+    //run("echo \"rm ~/.ycpedef_checker_source/checker ~/.ycpedef_checker_source/install.sh ~/.ycpedef_checker_source/checker.cpp ~/.ycpedef_checker_source/update.sh ~/.ycpedef_checker_source/release.sh ~/.ycpedef_checker_source/create.sh ~/.ycpedef_checker_source/compile.sh ~/.ycpedef_checker_source/git_push.sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"git pull origin master 1> /dev/null 2> /dev/null\" >> ~/.ycpedef_checker_update/update.sh");
     run("echo \"sh copy.sh\" >> ~/.ycpedef_checker_update/update.sh");
     run("chmod +x ~/.ycpedef_checker_update/update.sh");
