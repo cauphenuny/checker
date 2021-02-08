@@ -6,5 +6,5 @@ cd ~/.ycpedef_checker_source
 git init
 git remote add origin https://github.com/ycpedef/checker
 git pull origin master 1> /dev/null 2> /dev/null
-bash copy.sh
+bash ./copy.sh
 
