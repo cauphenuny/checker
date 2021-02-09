@@ -6,7 +6,7 @@ mkdir -p ~/.ycpedef_checker_source 1>/dev/null 2>&1
 
 # echo "download file ..."
 cd ~/.ycpedef_checker_source 1>/dev/null 2>&1
-git clone https://github.com/ycpedef/checker ./ --depth=1
+git clone https://github.com/ycpedef/checker ./ --depth=1 1>/dev/null 2>&
 
 # echo "move file ..."
 if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
