@@ -19,7 +19,7 @@
 //#include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.5.7";
+string __version = "checker v5.5.8";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
@@ -222,7 +222,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': puts("start update ..."); start_forced_update(); break;
+            case 'u': start_forced_update(); break;
             default: usage(); break;
         }
     }
