@@ -15,7 +15,7 @@ if [ -f ~/.ycpedef_checker_source ]; then
     rm -rf ~/.ycpedef_checker_source
 fi
 
-echo "installing git ..."
+echo "installing git wget ..."
 sudo apt install -y git wget 1>/dev/null 2>/dev/null
 
 echo "download file ..."
