@@ -1,13 +1,13 @@
 # checker
-A useful checker for OI
+A useful and convenient checker for OI
 
-## install
+## Install
 ```bash
 ./install.sh
 checker -h
 ```
 
-## usage:
+## Usage:
 ```
 checker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]
 
@@ -19,4 +19,5 @@ checker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]
 -u: update
 ```
 
-current version: 5.4
+---
+Current version: 5.5

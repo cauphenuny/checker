@@ -14,20 +14,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <readline/history.h>
+#include <readline/readline.h>
 #include "color.h"
-//#include <readline/history.h>
-//#include <readline/readline.h>
 using namespace std;
 
-string __version = "checker v5.5.6";
+string __version = "checker v5.5.10";
 
-string readline(string prompt) {
-    printf("%s", prompt.c_str());
-    string res;
-    cin >> res;
-    return res;
-}
-
+//string readline(string prompt) {
+//    printf("%s", prompt.c_str());
+//    string res;
+//    cin >> res;
+//    return res;
+//}
+//
 long long myclock() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
@@ -178,10 +178,6 @@ void auto_update() {
 
 void start_update() {
     signal(SIGTERM, normal_exit);
-    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(auto_update);
     exit(0);
 }
@@ -192,10 +188,6 @@ void forced_update() {
 
 void start_forced_update() {
     signal(SIGTERM, normal_exit);
-    if (access("~/.ycpedef_checker_source/auto_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/auto_update.sh ~/.ycpedef_checker_update/auto_update.sh");
-    if (access("~/.ycpedef_checker_source/forced_update.sh", F_OK) == 0)
-        run("cp ~/.ycpedef_checker_source/forced_update.sh ~/.ycpedef_checker_update/forced_update.sh");
     atexit(forced_update);
     exit(0);
 }
@@ -230,7 +222,7 @@ void load_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
-            case 'u': puts("start update ..."); start_forced_update(); break;
+            case 'u': start_forced_update(); break;
             default: usage(); break;
         }
     }
@@ -267,7 +259,7 @@ int main(int argc, char *argv[]) {
                 flag = 0;
             }
         } else {
-            puts("\nloading...");
+            printf("\nloading problem " GREEN "%s" NONE " ...\n", prob.c_str());
             load_data(T, dtm, sc1, sc2, probcfg, timelimit);
             flag = 0;
         }
