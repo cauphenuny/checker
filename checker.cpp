@@ -14,9 +14,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include "color.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+#include "color.h"
 using namespace std;
 
 string __version = "checker v5.5.9";
