@@ -258,7 +258,7 @@ int main(int argc, char *argv[]) {
                 flag = 0;
             }
         } else {
-            printf("\nloading problem " GREEN "%s" NONE " ...\n", prob.c_str());
+            printf("loading problem " GREEN "%s" NONE " ...\n\n", prob.c_str());
             load_data(T, dtm, sc1, sc2, probcfg, timelimit);
             flag = 0;
         }
