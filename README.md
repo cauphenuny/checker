@@ -1,4 +1,4 @@
-# checker
+# Checker
 A useful and convenient checker for OI
 
 ## Install
