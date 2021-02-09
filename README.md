@@ -20,4 +20,4 @@ checker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]
 ```
 
 ---
-**Current version: 5.5**
+Current version: 5.5
