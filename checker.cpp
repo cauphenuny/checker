@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.9";
+string __version = "checker v5.5.10";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -259,7 +259,7 @@ int main(int argc, char *argv[]) {
                 flag = 0;
             }
         } else {
-            puts("\nloading...");
+            printf("\nloading problem " GREEN "%s" NONE " ...\n", prob.c_str());
             load_data(T, dtm, sc1, sc2, probcfg, timelimit);
             flag = 0;
         }
