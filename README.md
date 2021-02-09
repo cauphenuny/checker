@@ -19,4 +19,5 @@ checker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]
 -u: update
 ```
 
-Current version: 5.5
+---
+**Current version: 5.5**
