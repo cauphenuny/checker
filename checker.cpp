@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.12";
+string __version = "checker v5.5.13";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
