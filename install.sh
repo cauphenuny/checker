@@ -16,7 +16,7 @@ if [ -f ~/.ycpedef_checker_source ]; then
 fi
 
 echo "installing dependencies ..."
-sudo apt install -y git wget 1>/dev/null 2>/dev/null
+sudo apt install -y git wget vim 1>/dev/null 2>/dev/null
 
 echo "download file ..."
 rm -rf ~/.ycpedef_checker_source/

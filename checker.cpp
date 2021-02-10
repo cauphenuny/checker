@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.13";
+string __version = "checker v5.5.14";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -472,10 +472,11 @@ int main(int argc, char *argv[]) {
                 }
                 goto err342;
             } else if (c == 'd') {
-                puts("open file...");
-                if (run("vim -d " + out + ans)) {
-                    puts(L_RED"\nFailed. Install vim and try again.\n");
-                }
+                puts(RED "No output file!" NONE);
+                //puts("open file...");
+                //if (run("vim -d " + out + ans)) {
+                //    puts(L_RED"\nFailed. Install vim and try again.\n");
+                //}
                 goto err342;
             }
         }
@@ -507,10 +508,11 @@ int main(int argc, char *argv[]) {
                 }
                 goto err370;
             } else if (c == 'd') {
-                puts("open file...");
-                if (run("vim -d " + out + ans)) {
-                    puts(L_RED"\nFailed. Install vim and try again.\n");
-                }
+                puts(RED "No output file!" NONE);
+                //puts("open file...");
+                //if (run("vim -d " + out + ans)) {
+                //    puts(L_RED"\nFailed. Install vim and try again.\n");
+                //}
                 goto err370;
             }
         }
