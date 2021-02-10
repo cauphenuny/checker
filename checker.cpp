@@ -14,19 +14,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include <readline/history.h>
-#include <readline/readline.h>
+//#include <readline/history.h>
+//#include <readline/readline.h>
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.13";
+string __version = "checker v5.5.13, compatible";
 
-//string readline(string prompt) {
-//    printf("%s", prompt.c_str());
-//    string res;
-//    cin >> res;
-//    return res;
-//}
+string readline(string prompt) {
+    printf("%s", prompt.c_str());
+    string res;
+    cin >> res;
+    return res;
+}
 
 long long myclock() {
     struct timeval tv;
