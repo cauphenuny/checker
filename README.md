@@ -1,5 +1,5 @@
 # Checker
-A useful and convenient checker for OI
+A useful and convenient checker for OI. (**compatible version**, no GNU-readline)
 
 ## Install
 ```bash
