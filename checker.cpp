@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.13";
+string __version = "checker v5.6.0";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -285,18 +285,18 @@ int main(int argc, char *argv[]) {
     string ansprogram = file + "ans";
     int gccret = 0;
     printf("compiling \"%s\" ...\n", dtm.c_str());
-    gccret = run("g++ " + dtm + " -o " + dataprogram);
+    gccret = run("g++ " + dtm + " -o " + dataprogram + " -Dfreopen(...)");
     int compile_error = 0;
     if (WEXITSTATUS(gccret)) {
         compile_error += 1;
     }
     printf("compiling \"%s\" ...\n", sc1.c_str());
-    gccret = run("g++ " + sc1 + " -o " + outprogram);
+    gccret = run("g++ " + sc1 + " -o " + outprogram + " -Dfreopen(...)");
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
     printf("compiling \"%s\" ...\n", sc2.c_str());
-    gccret = run("g++ " + sc2 + " -o " + ansprogram);
+    gccret = run("g++ " + sc2 + " -o " + ansprogram + " -Dfreopen(...)");
     if (WEXITSTATUS(gccret)) {
         compile_error += 4;
     }
