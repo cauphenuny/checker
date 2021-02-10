@@ -197,7 +197,7 @@ void usage() {
     puts("-f: fast mode");
     puts("-l: always load problem file");
     puts("-c: always continue when error occurs");
-    puts("-q: always quit when error occors");
+    puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
     puts("-u: update");
     printf("\n" BOLD UNDERLINE "%s" NONE"\n", __version.c_str());
