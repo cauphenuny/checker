@@ -285,18 +285,18 @@ int main(int argc, char *argv[]) {
     string ansprogram = file + "ans";
     int gccret = 0;
     printf("compiling \"%s\" ...\n", dtm.c_str());
-    gccret = run("g++ " + dtm + " -o " + dataprogram + " -Dfreopen(...)");
+    gccret = run("g++ " + dtm + " -o " + dataprogram + " -Dfreopen");
     int compile_error = 0;
     if (WEXITSTATUS(gccret)) {
         compile_error += 1;
     }
     printf("compiling \"%s\" ...\n", sc1.c_str());
-    gccret = run("g++ " + sc1 + " -o " + outprogram + " -Dfreopen(...)");
+    gccret = run("g++ " + sc1 + " -o " + outprogram + " -Dfreopen");
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
     printf("compiling \"%s\" ...\n", sc2.c_str());
-    gccret = run("g++ " + sc2 + " -o " + ansprogram + " -Dfreopen(...)");
+    gccret = run("g++ " + sc2 + " -o " + ansprogram + " -Dfreopen");
     if (WEXITSTATUS(gccret)) {
         compile_error += 4;
     }
