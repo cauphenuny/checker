@@ -244,14 +244,14 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            usage();
+            //usage();
         }
     } else if (key == "branch") {
         branch = key;
         printf("changed branch to <%s>.\n", branch.c_str());
-        forced_update();
+        start_update();
     } else {
-        usage();
+        //usage();
     }
 }
 
