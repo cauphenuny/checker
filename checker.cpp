@@ -253,6 +253,7 @@ void analysis_long_cmd(string s, int &pos) {
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
+        cout << key << endl;
         usage();
     }
 }
