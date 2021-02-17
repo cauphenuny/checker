@@ -245,6 +245,7 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
+            cout << value << endl;
             usage();
         }
     } else if (key == "branch") {
