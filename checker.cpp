@@ -202,14 +202,14 @@ void usage() {
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
     puts("-u: update");
-    printf("\n%s%s\n", __version.c_str(), __branch.c_str());
+    printf(BOLD "\n%s" NONE "%s\n", __version.c_str(), __branch.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
 }
 
 void check_version() {
-    printf("%s%s\n", __version.c_str(), __branch.c_str());
+    printf(BOLD "%s" NONE "%s\n", __version.c_str(), __branch.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
