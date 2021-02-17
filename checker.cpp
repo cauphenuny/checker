@@ -217,7 +217,7 @@ void usage() {
 }
 
 void check_version() {
-    if (branch != "master") printf(BOLD "%s" NONE "%s\n", version.c_str(), branch.c_str());
+    if (branch != "master") printf(BOLD "%s" NONE " <%s>\n", version.c_str(), branch.c_str());
     else                    printf(BOLD "%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
