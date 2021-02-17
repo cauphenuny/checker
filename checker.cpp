@@ -196,7 +196,7 @@ void start_forced_update() {
 
 void usage(int id) {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-vlcqsuh] [--save=] [--branch=]\n");
+    puts("\nchecker [$problem_name] [-hscqvu] [--save=] [--branch=]\n");
     puts("-h: display this help and quit");
     puts("-s: slow mode");
     puts("-c: always continue when error occurs");
