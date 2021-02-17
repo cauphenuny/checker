@@ -19,8 +19,10 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "rumrumgib v5.6.6" NONE;
+string version = UNDERLINE "rumrumgib v5.6.8" NONE;
 string branch = "master";
+const string config_dir = ".config/";
+const string data_dir = ".data/";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -60,14 +62,19 @@ void bash_fail() {
 }
 
 void store_data(int T, string data, string sc1, string sc2, string prob, int time) {
-    string file = ".config/" + prob + ".cfg";
+    string file = config_dir + prob;
+    //string file = config_dir + prob + ".cfg";
     ofstream filestream(file.c_str());
     filestream << T << endl << data << endl << sc1 << endl << sc2 << endl << prob << endl << time << endl;
     filestream.close();
 }
 
 void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time) {
-    string infile = prob + ".cfg";
+    string infile_old = prob + ".cfg";
+    string infile = prob;
+    if (access(infile_old.c_str(), F_OK)) {
+        run("cp " + infile_old + " " + infile);
+    }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
         printf("Failed!");
@@ -82,7 +89,11 @@ void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int 
 }
 
 bool check_file(string prob) {
-    string infile = prob + ".cfg";
+    string infile_old = prob + ".cfg";
+    string infile = prob;
+    if (access(infile_old.c_str(), F_OK)) {
+        run("cp " + infile_old + " " + infile);
+    }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
         filestream.close();
@@ -294,17 +305,20 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    if (access(data_dir.c_str(), F_OK) != 0 || !isdir(data_dir.c_str()))
+        if (run("mkdir " + data_dir)) bash_fail();
+    if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
+        if (run("mkdir " + config_dir)) bash_fail();
+    signal(SIGINT, normal_exit);
+    chdir(config_dir.c_str());
     while(prob == "") prob = readline("name of the problem: ");
-    if (access(".data", F_OK) != 0 || !isdir(".data"))
-        if (system("mkdir .data")) bash_fail();
-    if (access(".config", F_OK) != 0 || !isdir(".config"))
-        if (system("mkdir .config")) bash_fail();
+    chdir("..");
     //system("clear");
     int flag = 1;
-    string probcfg = ".config/" + prob;
+    string probcfg = config_dir + prob;
     if (check_file(probcfg)) {
         if (!always_load) {
-            printf("\nFinded the problem file " GREEN"\"%s.cfg\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
+            printf("\nFinded the problem file " GREEN"\"%s\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
             char c = getchar();
             if (c == 'y') {
                 puts("\nloading...");
@@ -331,7 +345,7 @@ int main(int argc, char *argv[]) {
         puts("");
     }
     judge:
-    file = ".data/" + prob + "/";
+    file = data_dir + prob + "/";
     if (run("rm -rf ./" + file)) bash_fail();
     if (run("mkdir " + file)) bash_fail();
     string dataprogram = file + "data";
@@ -630,4 +644,3 @@ int main(int argc, char *argv[]) {
     quit(0);
     return 0;
 }
-
