@@ -234,7 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') usage();
+    if (s[pos] != '=') cout << s[pos] << endl, usage();
     pos++;
     string value = getword(s, pos);
     if (key == "save") {
