@@ -267,7 +267,7 @@ void analysis_cmd(string cmd)  {
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
-            case '-': analysis_long_cmd(cmd, i), cout << cmd[i] << endl;
+            case '-': analysis_long_cmd(cmd, i), i--; break;
             default: cout << __LINE__ << endl, usage(); break;
         }
     }
