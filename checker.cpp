@@ -235,6 +235,7 @@ void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
     if (s[pos] != '=') usage();
+    pos++;
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
