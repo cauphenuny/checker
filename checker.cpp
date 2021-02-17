@@ -199,7 +199,6 @@ void usage(int id) {
     puts("\nchecker [$problem_name] [-vlcqfuh] [--save=] [--branch=]\n");
     puts("-h: display this help and quit");
     puts("-f: fast mode");
-    puts("-l: always load problem file");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
@@ -262,7 +261,6 @@ void analysis_long_cmd(string s, int &pos) {
 void analysis_cmd(string cmd)  {
     for (int i = 1; i < cmd.length(); i++) {
         switch (cmd[i]) {
-            case 'l': always_load = 1; break;
             case 'c': always_continue = 1, always_quit = 0; break;
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
@@ -284,7 +282,7 @@ int main(int argc, char *argv[]) {
     if (argc >= 2) {
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
-                if (!prof) prob = argv[i], prof = 1;
+                if (!prof) prob = argv[i], prof = 1, always_load = 1;
                 else usage(1);
             } else {
                 analysis_cmd(argv[i]);
