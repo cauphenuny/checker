@@ -148,7 +148,7 @@ void register_signal() {
     }
 }
 
-bool always_load, always_continue, always_quit, fast_mode;
+bool always_load, always_continue, always_quit, fast_mode = 1;
 int save_mode;
 
 char judge_pause() {
@@ -196,8 +196,9 @@ void start_forced_update() {
 
 void usage(int id) {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-vlcqfuh] [--save=] [--branch=]\n");
+    puts("\nchecker [$problem_name] [-vlcqsfuh] [--save=] [--branch=]\n");
     puts("-h: display this help and quit");
+    puts("-s: slow mode");
     puts("-f: fast mode");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
@@ -266,6 +267,7 @@ void analysis_cmd(string cmd)  {
             case 'c': always_continue = 1, always_quit = 0; break;
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
+            case 's': fast_mode = 0; break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
             case 'h': usage(0); break;
