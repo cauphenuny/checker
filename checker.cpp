@@ -245,7 +245,7 @@ void analysis_long_cmd(string s, int &pos) {
             save_mode = 3;
         } else {
             printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
-            printf("Try: 'checker -h'\n");
+            printf("Try: 'checker -h' to learn more info.\n");
             start_update();
             exit(1);
         }
@@ -255,7 +255,7 @@ void analysis_long_cmd(string s, int &pos) {
         start_update();
     } else {
         printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
-        printf("Try: 'checker -h'\n");
+        printf("Try: 'checker -h' to learn more info.\n");
         start_update();
         exit(1);
     }
@@ -273,7 +273,7 @@ void analysis_cmd(string cmd)  {
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
                 printf("Invalid option " RED "-%c" NONE " !\n", cmd[i]);
-                printf("Try: 'checker -h'\n");
+                printf("Try: 'checker -h' to learn more info.\n");
                 start_update();
                 exit(1);
                 break;
