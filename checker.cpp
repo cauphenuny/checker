@@ -248,7 +248,7 @@ void analysis_long_cmd(string s, int &pos) {
             usage();
         }
     } else if (key == "branch") {
-        branch = key;
+        branch = value;
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
