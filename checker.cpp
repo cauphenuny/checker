@@ -19,7 +19,8 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.13";
+string version = UNDERLINE "checker v5.6.0" NONE;
+string branch = "compatible";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
@@ -134,7 +135,8 @@ void quit(int signum) {
     printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
-    printf("(" BOLD UNDERLINE "%s" NONE ", compatible)\n\n", __version.c_str());
+    if (branch != "master") printf("%s <%s>\n\n", version.c_str(), branch.c_str());
+    else                    printf("%s\n\n", version.c_str());
     //printf(", compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
@@ -147,6 +149,7 @@ void register_signal() {
 }
 
 bool always_load, always_continue, always_quit, fast_mode;
+int save_mode;
 
 char judge_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
@@ -172,7 +175,7 @@ void normal_exit(int signum) {
 }
 
 void auto_update() {
-    run("~/.ycpedef_checker_update/auto_update.sh");
+    run("~/.ycpedef_checker_update/auto_update.sh " + branch);
 }
 
 void start_update() {
@@ -182,7 +185,7 @@ void start_update() {
 }
 
 void forced_update() {
-    run("~/.ycpedef_checker_update/forced_update.sh");
+    run("~/.ycpedef_checker_update/forced_update.sh " + branch);
 }
 
 void start_forced_update() {
@@ -191,29 +194,72 @@ void start_forced_update() {
     exit(0);
 }
 
-void usage() {
+void usage(int id) {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-v] [-l] [-c] [-q] [-f] [-u]\n");
+    puts("\nchecker [$problem_name] [-vlcqfuh] [--save=] [--branch=]\n");
+    puts("-h: display this help and quit");
     puts("-f: fast mode");
     puts("-l: always load problem file");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
-    puts("-u: update");
-    printf("\n" BOLD UNDERLINE "%s" NONE", compatible\n", __version.c_str());
+    puts("-u: update\n");
+    puts("--save=auto  : save file only when error occurs (default)");
+    puts("       always: always save input and output file");
+    puts("       never : never save file\n");
+    puts("--branch=master    : default branch");
+    puts("         dev       : developing branch, new and experimental");
+    puts("         compatible: compatible branch, for older OS, without GNU-readline");
+    if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
+    else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
-    exit(0);
+    exit(id);
 }
 
 void check_version() {
-    printf(BOLD UNDERLINE "%s" NONE ", compatible\n", __version.c_str());
+    if (branch != "master") printf(BOLD "%s" NONE " <%s>\n", version.c_str(), branch.c_str());
+    else                    printf(BOLD "%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
 }
 
-void load_cmd(string cmd)  {
+string getword(string s, int &pos) {
+    string res = "";
+    while (isalpha(s[pos]))
+        res += s[pos], pos++;
+    return res;
+}
+
+void analysis_long_cmd(string s, int &pos) {
+    pos++;
+    string key = getword(s, pos);
+    if (s[pos] != '=') usage(1);
+    pos++;
+    string value = getword(s, pos);
+    if (key == "save") {
+        if (value == "always") {
+            save_mode = 1;
+        } else if (value == "auto") {
+            save_mode = 2;
+        } else if (value == "never") {
+            save_mode = 3;
+        } else {
+            printf("Invalid save mode " RED "\"%s\"" NONE " !\n", value.c_str());
+            exit(1);
+        }
+    } else if (key == "branch") {
+        branch = value;
+        printf("changed branch to <%s>.\n", branch.c_str());
+        start_update();
+    } else {
+        printf("Invalid option " RED "\"%s\"" NONE " !\n", key.c_str());
+        exit(1);
+    }
+}
+
+void analysis_cmd(string cmd)  {
     for (int i = 1; i < cmd.length(); i++) {
         switch (cmd[i]) {
             case 'l': always_load = 1; break;
@@ -222,7 +268,12 @@ void load_cmd(string cmd)  {
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
-            default: usage(); break;
+            case 'h': usage(0); break;
+            case '-': analysis_long_cmd(cmd, i), i--; break;
+            default:
+                printf("Invalid option " RED "'%c'" NONE " !\n", cmd[i]);
+                exit(1);
+                break;
         }
     }
 }
@@ -234,9 +285,9 @@ int main(int argc, char *argv[]) {
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
                 if (!prof) prob = argv[i], prof = 1;
-                else usage();
+                else usage(1);
             } else {
-                load_cmd(argv[i]);
+                analysis_cmd(argv[i]);
             }
         }
     }
@@ -338,7 +389,7 @@ int main(int argc, char *argv[]) {
         string out_with_id = file + tostring(i) + ".out ";
         string ans_with_id = file + tostring(i) + ".ans ";
         string in, out, ans;
-        if (fast_mode) {
+        if (save_mode != 1) {
             in = file + "in.log ";
             out = file + "out.log ";
             ans = file + "ans.log ";
@@ -452,9 +503,11 @@ int main(int argc, char *argv[]) {
         if (errorflag == 2) printf(NONE"time2: %lldms (return %d)\n", b_time - a_time, WEXITSTATUS(ret));
         else printf(NONE"\n" NONE"time2: %lldms\n", b_time - a_time);
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err342:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
@@ -472,10 +525,11 @@ int main(int argc, char *argv[]) {
                 }
                 goto err342;
             } else if (c == 'd') {
-                puts("open file...");
-                if (run("vim -d " + out + ans)) {
-                    puts(L_RED"\nFailed. Install vim and try again.\n");
-                }
+                puts(RED "No output file!" NONE);
+                //puts("open file...");
+                //if (run("vim -d " + out + ans)) {
+                //    puts(L_RED"\nFailed. Install vim and try again.\n");
+                //}
                 goto err342;
             }
         }
@@ -487,9 +541,11 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err370:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
@@ -507,10 +563,11 @@ int main(int argc, char *argv[]) {
                 }
                 goto err370;
             } else if (c == 'd') {
-                puts("open file...");
-                if (run("vim -d " + out + ans)) {
-                    puts(L_RED"\nFailed. Install vim and try again.\n");
-                }
+                puts(RED "No output file!" NONE);
+                //puts("open file...");
+                //if (run("vim -d " + out + ans)) {
+                //    puts(L_RED"\nFailed. Install vim and try again.\n");
+                //}
                 goto err370;
             }
         }
@@ -522,9 +579,11 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err395:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
@@ -568,3 +627,5 @@ int main(int argc, char *argv[]) {
     quit(0);
     return 0;
 }
+
+

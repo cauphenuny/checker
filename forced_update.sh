@@ -7,8 +7,8 @@ mkdir -p ~/.ycpedef_checker_buffer
 
 echo -e "\e[1;32m[download file] \e[0m"
 cd ~/.ycpedef_checker_buffer
-wget https://gitee.com/yuanchenpu/checker/repository/archive/compatible.zip
-unzip compatible.zip
+wget https://gitee.com/yuanchenpu/checker/repository/archive/$1.zip
+unzip $1.zip
 cd checker/
 cp -r ./ ~/.ycpedef_checker_source
 cd ~/.ycpedef_checker_source
@@ -19,3 +19,5 @@ if [ -f ~/.ycpedef_checker_source/copy.sh ]; then
     ~/.ycpedef_checker_source/copy.sh
 fi
 rm -rf ~/.ycpedef_checker_source 1>/dev/null 2>&1
+
+
