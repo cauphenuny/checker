@@ -313,7 +313,7 @@ int main(int argc, char *argv[]) {
     chdir(config_dir.c_str());
     while (prob == "") prob = readline("name of the problem: ");
     chdir("..");
-    while (prob[prob.length() - 1] == ' ') --prob;
+    while (prob[prob.length() - 1] == ' ') prob.pop_back();
     //system("clear");
     int flag = 1;
     string probcfg = config_dir + prob;
