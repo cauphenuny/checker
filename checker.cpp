@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "rumrumgib v5.6.5" NONE;
+string version = UNDERLINE "rumrumgib v5.6.6" NONE;
 string branch = "master";
 
 //string readline(string prompt) {
@@ -246,6 +246,7 @@ void analysis_long_cmd(string s, int &pos) {
         } else {
             printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
             printf("Try this command: 'checker -h'\n");
+            start_update();
             exit(1);
         }
     } else if (key == "branch") {
@@ -255,6 +256,7 @@ void analysis_long_cmd(string s, int &pos) {
     } else {
         printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
         printf("Try this command: 'checker -h'\n");
+        start_update();
         exit(1);
     }
 }
@@ -272,6 +274,7 @@ void analysis_cmd(string cmd)  {
             default:
                 printf("Invalid option " RED "-%c" NONE " !\n", cmd[i]);
                 printf("Try this command: 'checker -h'\n");
+                start_update();
                 exit(1);
                 break;
         }
