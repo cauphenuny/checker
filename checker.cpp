@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.2" NONE;
+string version = UNDERLINE "checker v5.6.3" NONE;
 string branch = "master";
 
 //string readline(string prompt) {
@@ -234,8 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') usage(1);
-    pos++;
+    if (s[pos] == '=') pos++;
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
