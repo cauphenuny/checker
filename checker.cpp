@@ -245,7 +245,7 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            printf("Invalid save mode " L_RED "\"%s\"!\n" NONE, value.c_str());
+            printf("Invalid save mode " L_RED "\"%s\"" NONE "!\n", value.c_str());
             exit(1);
         }
     } else if (key == "branch") {
@@ -253,7 +253,7 @@ void analysis_long_cmd(string s, int &pos) {
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        printf("Invalid option " L_RED "\"%s\"!\n" NONE, key.c_str());
+        printf("Invalid option " L_RED "\"%s\"" NONE "!\n", key.c_str());
         exit(1);
     }
 }
