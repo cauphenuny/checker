@@ -25,5 +25,4 @@ checker -h
 - [ ] 支持程序使用文件IO
 
 ---
-Current version: 5.6  
 Supported operating system: Ubuntu 20.04
