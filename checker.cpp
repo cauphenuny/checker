@@ -20,7 +20,7 @@
 using namespace std;
 
 string __version = "checker v5.6.0";
-string __branch = ", dev";
+string __branch = " <dev>";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
