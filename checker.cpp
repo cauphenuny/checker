@@ -203,8 +203,8 @@ void usage() {
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
     puts("-u: update\n");
-    puts("--save=always: always save input and output file");
-    puts("       auto  : save file only when error occurs (default)");
+    puts("--save=auto  : save file only when error occurs (default)");
+    puts("       always: always save input and output file");
     puts("       never : never save file\n");
     puts("--branch=master    : default branch");
     puts("         dev       : developing branch, new and experimental");
@@ -224,7 +224,26 @@ void check_version() {
     exit(0);
 }
 
-void load_cmd(string cmd)  {
+string getword(string s, int &pos) {
+    string res = "";
+    while (isalpha(pos))
+        res += s[pos], pos++;
+    return res;
+}
+
+int analysis_long_cmd(string s, int &pos) {
+    pos++;
+    string key = getword(s, pos);
+    if (s[pos++] != '=') usage();
+    string value = getword(s, pos);
+    switch (key) {
+        case "save": break;
+        case "branch": break;
+        default: usage(); break;
+    }
+}
+
+void analysis_cmd(string cmd)  {
     for (int i = 1; i < cmd.length(); i++) {
         switch (cmd[i]) {
             case 'l': always_load = 1; break;
@@ -233,6 +252,7 @@ void load_cmd(string cmd)  {
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
+            case '-': analysis_long_cmd(cmd, i);
             default: usage(); break;
         }
     }
@@ -247,7 +267,7 @@ int main(int argc, char *argv[]) {
                 if (!prof) prob = argv[i], prof = 1;
                 else usage();
             } else {
-                load_cmd(argv[i]);
+                analysis_cmd(argv[i]);
             }
         }
     }
