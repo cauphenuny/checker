@@ -270,7 +270,7 @@ void analysis_cmd(string cmd)  {
             case 'h': usage(0); break;
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
-                printf(L_RED "Invalid option '%s'!\n" NONE, cmd[i]);
+                printf(L_RED "Invalid option '%c'!\n" NONE, cmd[i]);
                 exit(1);
                 break;
         }
