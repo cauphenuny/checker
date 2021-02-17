@@ -28,5 +28,5 @@ checker [$problem_name] [-vlcqfuh] [--save=] [--branch=]
 ```
 
 ---
-Current version: 5.5  
+Current version: 5.6  
 Supported operating system: Ubuntu 20.04
