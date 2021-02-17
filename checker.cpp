@@ -197,15 +197,17 @@ void start_forced_update() {
 
 void usage() {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-vlcqfu] [--branch=master/dev/compatible] [--save=always/auto/never]\n");
+    puts("\nchecker [$problem_name] [-vlcqfu] [--save=always/auto/never] [--branch=master/dev/compatible]\n");
     puts("-f: fast mode");
     puts("-l: always load problem file");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
-    puts("-u: update");
+    puts("-u: update\n");
     puts("--branch: switch branch");
-    puts("--save: change save mode");
+    puts("--save=always: always save input and output file");
+    puts("       auto  : save file only when error occurs (default)");
+    puts("       never : never save file");
     if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), __branch.c_str());
     else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
