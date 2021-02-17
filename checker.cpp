@@ -162,7 +162,7 @@ char judge_pause() {
 
 char answer_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
-    puts(NONE GRAY"(press [i] to check input file, [d] to diff output file)" NONE);
+    puts(NONE GRAY"(press [i] to check input file, [d] to use vim to diff output file)" NONE);
     char c;
     if (always_continue) return 'c';
     if (always_quit) return 'q';
