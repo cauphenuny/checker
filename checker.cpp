@@ -14,20 +14,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-//#include <readline/history.h>
-//#include <readline/readline.h>
+#include <readline/history.h>
+#include <readline/readline.h>
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.0" NONE;
-string branch = "compatible";
+string version = UNDERLINE "checker v5.6.2" NONE;
+string branch = "master";
 
-string readline(string prompt) {
-    printf("%s", prompt.c_str());
-    string res;
-    cin >> res;
-    return res;
-}
+//string readline(string prompt) {
+//    printf("%s", prompt.c_str());
+//    string res;
+//    cin >> res;
+//    return res;
+//}
 
 long long myclock() {
     struct timeval tv;
@@ -199,7 +199,6 @@ void usage(int id) {
     puts("\nchecker [$problem_name] [-vlcqfuh] [--save=] [--branch=]\n");
     puts("-h: display this help and quit");
     puts("-f: fast mode");
-    puts("-l: always load problem file");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
@@ -246,7 +245,8 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            printf("Invalid save mode " RED "\"%s\"" NONE " !\n", value.c_str());
+            printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
+            printf("Try this command: 'checker -h'\n");
             exit(1);
         }
     } else if (key == "branch") {
@@ -254,7 +254,8 @@ void analysis_long_cmd(string s, int &pos) {
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        printf("Invalid option " RED "\"%s\"" NONE " !\n", key.c_str());
+        printf("Invalid option " RED "%s" NONE " !\n", key.c_str());
+        printf("Try this command: 'checker -h'\n");
         exit(1);
     }
 }
@@ -262,7 +263,6 @@ void analysis_long_cmd(string s, int &pos) {
 void analysis_cmd(string cmd)  {
     for (int i = 1; i < cmd.length(); i++) {
         switch (cmd[i]) {
-            case 'l': always_load = 1; break;
             case 'c': always_continue = 1, always_quit = 0; break;
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
@@ -271,7 +271,8 @@ void analysis_cmd(string cmd)  {
             case 'h': usage(0); break;
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
-                printf("Invalid option " RED "'%c'" NONE " !\n", cmd[i]);
+                printf("Invalid option " RED "%c" NONE " !\n", cmd[i]);
+                printf("Try this command: 'checker -h'\n");
                 exit(1);
                 break;
         }
@@ -284,7 +285,7 @@ int main(int argc, char *argv[]) {
     if (argc >= 2) {
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
-                if (!prof) prob = argv[i], prof = 1;
+                if (!prof) prob = argv[i], prof = 1, always_load = 1;
                 else usage(1);
             } else {
                 analysis_cmd(argv[i]);
@@ -318,7 +319,7 @@ int main(int argc, char *argv[]) {
         //system("clear");
         printf("Test Cases: ");
         scanf("%d", &T);
-        do dtm = readline("name of datamaker: "); while (dtm == "");
+        do dtm = readline("name of generator: "); while (dtm == "");
         do sc1 = readline("name of source1: "); while (sc1 == "");
         do sc2 = readline("name of source2: "); while (sc2 == "");
         printf("time limit (ms): ");
