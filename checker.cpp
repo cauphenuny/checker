@@ -72,8 +72,8 @@ void store_data(int T, string data, string sc1, string sc2, string prob, int tim
 void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time) {
     string infile_old = prob + ".cfg";
     string infile = prob;
-    if (access(infile_old.c_str(), F_OK)) {
-        run("cp " + infile_old + " " + infile);
+    if (access(infile_old.c_str(), F_OK) == 0) {
+        run("mv " + infile_old + " " + infile);
     }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
@@ -91,8 +91,8 @@ void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int 
 bool check_file(string prob) {
     string infile_old = prob + ".cfg";
     string infile = prob;
-    if (access(infile_old.c_str(), F_OK)) {
-        run("cp " + infile_old + " " + infile);
+    if (access(infile_old.c_str(), F_OK) == 0) {
+        run("mv " + infile_old + " " + infile);
     }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
