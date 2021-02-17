@@ -19,8 +19,8 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.2" NONE;
-string branch = "master";
+string version = UNDERLINE "checker v6.0.0" NONE;
+string branch = "dev";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
