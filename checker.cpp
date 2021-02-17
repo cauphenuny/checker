@@ -20,7 +20,7 @@
 using namespace std;
 
 string version = UNDERLINE "checker v5.6.2" NONE;
-string branch = "master";
+string branch = "compatible";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
