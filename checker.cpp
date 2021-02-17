@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "rumrumgib v5.6.6" NONE;
+string version = UNDERLINE "checker v5.6.6" NONE;
 string branch = "compatible";
 
 string readline(string prompt) {
