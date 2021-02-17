@@ -271,7 +271,6 @@ void analysis_cmd(string cmd)  {
 }
 
 int main(int argc, char *argv[]) {
-    load_branch();
     string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
     int T, timelimit;
     if (argc >= 2) {
