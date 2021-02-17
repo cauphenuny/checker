@@ -318,7 +318,7 @@ int main(int argc, char *argv[]) {
         //system("clear");
         printf("Test Cases: ");
         scanf("%d", &T);
-        do dtm = readline("name of datamaker: "); while (dtm == "");
+        do dtm = readline("name of generator: "); while (dtm == "");
         do sc1 = readline("name of source1: "); while (sc1 == "");
         do sc2 = readline("name of source2: "); while (sc2 == "");
         printf("time limit (ms): ");
