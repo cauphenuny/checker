@@ -311,8 +311,9 @@ int main(int argc, char *argv[]) {
         if (run("mkdir " + config_dir)) bash_fail();
     signal(SIGINT, normal_exit);
     chdir(config_dir.c_str());
-    while(prob == "") prob = readline("name of the problem: ");
+    while (prob == "") prob = readline("name of the problem: ");
     chdir("..");
+    while (prob[prob.length() - 1] == " ") prob--;
     //system("clear");
     int flag = 1;
     string probcfg = config_dir + prob;
