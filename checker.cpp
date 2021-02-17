@@ -148,7 +148,7 @@ void register_signal() {
     }
 }
 
-bool always_load, always_continue, always_quit, fast_mode = 1;
+bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1;
 int save_mode;
 
 char judge_pause() {
