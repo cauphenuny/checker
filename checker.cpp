@@ -234,7 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') cout << s[pos] << endl, usage();
+    if (s[pos] != '=') cout << s[pos] << endl, cout << __LINE__ << endl, usage();
     pos++;
     string value = getword(s, pos);
     if (key == "save") {
@@ -246,7 +246,7 @@ void analysis_long_cmd(string s, int &pos) {
             save_mode = 3;
         } else {
             cout << value << endl;
-            usage();
+            cout << __LINE__ << endl, usage();
         }
     } else if (key == "branch") {
         branch = value;
@@ -254,7 +254,7 @@ void analysis_long_cmd(string s, int &pos) {
         start_update();
     } else {
         cout << key << endl;
-        usage();
+        cout << __LINE__ << endl, usage();
     }
 }
 
@@ -268,7 +268,7 @@ void analysis_cmd(string cmd)  {
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
             case '-': analysis_long_cmd(cmd, i), i--;
-            default: usage(); break;
+            default: cout << __LINE__ << endl, usage(); break;
         }
     }
 }
