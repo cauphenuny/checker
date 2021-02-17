@@ -236,10 +236,22 @@ int analysis_long_cmd(string s, int &pos) {
     string key = getword(s, pos);
     if (s[pos++] != '=') usage();
     string value = getword(s, pos);
-    switch (key) {
-        case "save": break;
-        case "branch": break;
-        default: usage(); break;
+    if (key == "save") {
+        if (value == "always") {
+            save_mode = 1;
+        } else if (value == "auto") {
+            save_mode = 2;
+        } else if (value == "never") {
+            save_mode = 3;
+        } else {
+            usage();
+        }
+    } else if (key == "branch") {
+        branch = key;
+        printf("changed branch to <%s>.\n", branch.c_str());
+        forced_update();
+    } else {
+        usage();
     }
 }
 
@@ -259,6 +271,7 @@ void analysis_cmd(string cmd)  {
 }
 
 int main(int argc, char *argv[]) {
+    load_branch();
     string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
     int T, timelimit;
     if (argc >= 2) {
@@ -369,7 +382,7 @@ int main(int argc, char *argv[]) {
         string out_with_id = file + tostring(i) + ".out ";
         string ans_with_id = file + tostring(i) + ".ans ";
         string in, out, ans;
-        if (fast_mode) {
+        if (save_mode != 1) {
             in = file + "in.log ";
             out = file + "out.log ";
             ans = file + "ans.log ";
@@ -483,9 +496,11 @@ int main(int argc, char *argv[]) {
         if (errorflag == 2) printf(NONE"time2: %lldms (return %d)\n", b_time - a_time, WEXITSTATUS(ret));
         else printf(NONE"\n" NONE"time2: %lldms\n", b_time - a_time);
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err342:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
@@ -519,9 +534,11 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err370:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
@@ -555,9 +572,11 @@ int main(int argc, char *argv[]) {
             }
         }
         if (errorflag) {
-            printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            if (save_mode == 2) {
+                run("cp " + in + in_with_id);
+                printf(GREEN "Saved data to [ %s]\n" NONE, in_with_id.c_str());
+            }
             err395:
-            if (fast_mode) run("cp " + in + in_with_id);
             char c = answer_pause();
             if (c == 'c') {
                 puts("continue...");
