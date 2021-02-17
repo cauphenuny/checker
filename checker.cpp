@@ -19,7 +19,8 @@
 #include "color.h"
 using namespace std;
 
-string __version = "checker v5.5.14";
+string __version = "checker v5.6.0";
+string __branch = ", dev";
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -134,7 +135,7 @@ void quit(int signum) {
     printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
-    printf("(" BOLD UNDERLINE "%s" NONE ")\n\n", __version.c_str());
+    printf("(" BOLD UNDERLINE "%s" NONE "%s)\n\n", __version.c_str(), __branch.c_str());
     //printf(", compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
@@ -200,14 +201,14 @@ void usage() {
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
     puts("-u: update");
-    printf("\n" BOLD UNDERLINE "%s" NONE"\n", __version.c_str());
+    printf("\n" BOLD UNDERLINE "%s" NONE"%s\n", __version.c_str(), __branch.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
 }
 
 void check_version() {
-    printf(BOLD UNDERLINE "%s" NONE "\n", __version.c_str());
+    printf(BOLD UNDERLINE "%s" NONE "%s\n", __version.c_str(), __branch.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
