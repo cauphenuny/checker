@@ -309,7 +309,6 @@ int main(int argc, char *argv[]) {
         if (run("mkdir " + data_dir)) bash_fail();
     if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
         if (run("mkdir " + config_dir)) bash_fail();
-    signal(SIGINT, normal_exit);
     chdir(config_dir.c_str());
     while (prob == "") prob = readline("name of the problem: ");
     chdir("..");
