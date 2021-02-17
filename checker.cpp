@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.0" NONE;
+string version = UNDERLINE "zzm ak ioi v5.6.0" NONE;
 string branch = "master";
 
 //string readline(string prompt) {
