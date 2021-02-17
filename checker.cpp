@@ -234,7 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos++] != '=') usage();
+    if (s[pos] != '=') putchar(s[pos]), usage();
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
@@ -244,14 +244,14 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            //usage();
+            usage();
         }
     } else if (key == "branch") {
         branch = key;
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        //usage();
+        usage();
     }
 }
 
