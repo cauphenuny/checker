@@ -135,7 +135,7 @@ void quit(int signum) {
     printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
-    printf("%s\n\n", __version.c_str());
+    printf("%s%s\n\n", __version.c_str(), __branch.c_str());
     //printf(", compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
     exit(0);
