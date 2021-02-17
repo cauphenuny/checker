@@ -245,7 +245,7 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            printf("Invalid save mode " RED "\"%s\"" NONE " !\n", value.c_str());
+            printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
             printf("Try this command: 'checker -h'\n");
             exit(1);
         }
@@ -254,7 +254,7 @@ void analysis_long_cmd(string s, int &pos) {
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        printf("Invalid option " RED "\"%s\"" NONE " !\n", key.c_str());
+        printf("Invalid option " RED "%s" NONE " !\n", key.c_str());
         printf("Try this command: 'checker -h'\n");
         exit(1);
     }
@@ -271,7 +271,7 @@ void analysis_cmd(string cmd)  {
             case 'h': usage(0); break;
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
-                printf("Invalid option " RED "'%c'" NONE " !\n", cmd[i]);
+                printf("Invalid option " RED "%c" NONE " !\n", cmd[i]);
                 printf("Try this command: 'checker -h'\n");
                 exit(1);
                 break;
