@@ -226,7 +226,7 @@ void check_version() {
 
 string getword(string s, int &pos) {
     string res = "";
-    while (isalpha(pos))
+    while (isalpha(s[pos]))
         res += s[pos], pos++;
     return res;
 }
@@ -234,7 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') putchar(s[pos]), usage();
+    if (s[pos] != '=') usage();
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
