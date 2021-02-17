@@ -194,7 +194,7 @@ void start_forced_update() {
     exit(0);
 }
 
-void usage() {
+void usage(int id) {
     puts("usage: ");
     puts("\nchecker [$problem_name] [-vlcqfu] [--save=] [--branch=]\n");
     puts("-f: fast mode");
@@ -213,7 +213,7 @@ void usage() {
     else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
-    exit(0);
+    exit(id);
 }
 
 void check_version() {
@@ -234,7 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') cout << s[pos] << endl, cout << __LINE__ << endl, usage();
+    if (s[pos] != '=') usage(1);
     pos++;
     string value = getword(s, pos);
     if (key == "save") {
@@ -245,16 +245,16 @@ void analysis_long_cmd(string s, int &pos) {
         } else if (value == "never") {
             save_mode = 3;
         } else {
-            cout << value << endl;
-            cout << __LINE__ << endl, usage();
+            printf(L_RED "Invalid save mode \"%s\"!\n" NONE, value.c_str());
+            exit(1);
         }
     } else if (key == "branch") {
         branch = value;
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        cout << key << endl;
-        cout << __LINE__ << endl, usage();
+        printf(L_RED "Invalid option \"%s\"!\n" NONE, key.c_str());
+        exit(1);
     }
 }
 
@@ -267,8 +267,12 @@ void analysis_cmd(string cmd)  {
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
+            case 'h': usage(0); break;
             case '-': analysis_long_cmd(cmd, i), i--; break;
-            default: cout << __LINE__ << endl, usage(); break;
+            default:
+                printf(L_RED "Invalid option '%s'!\n" NONE, cmd[i]);
+                exit(1);
+                break;
         }
     }
 }
@@ -280,7 +284,7 @@ int main(int argc, char *argv[]) {
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
                 if (!prof) prob = argv[i], prof = 1;
-                else usage();
+                else usage(1);
             } else {
                 analysis_cmd(argv[i]);
             }
