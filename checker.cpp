@@ -319,7 +319,7 @@ int main(int argc, char *argv[]) {
     }
     if (flag) {
         //system("clear");
-        printf("Test Cases: ");
+        printf("amount of detection: ");
         scanf("%d", &T);
         do dtm = readline("name of generator: "); while (dtm == "");
         do sc1 = readline("name of source1: "); while (sc1 == "");
