@@ -231,7 +231,7 @@ string getword(string s, int &pos) {
     return res;
 }
 
-int analysis_long_cmd(string s, int &pos) {
+void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
     if (s[pos++] != '=') usage();
@@ -264,7 +264,7 @@ void analysis_cmd(string cmd)  {
             case 'v': check_version(); break;
             case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
-            case '-': analysis_long_cmd(cmd, i);
+            case '-': analysis_long_cmd(cmd, i), i--;
             default: usage(); break;
         }
     }
