@@ -21,7 +21,6 @@ using namespace std;
 
 string version = UNDERLINE "checker v5.6.0" NONE;
 string branch = "dev";
-string __branch;
 
 //string readline(string prompt) {
 //    printf("%s", prompt.c_str());
@@ -136,7 +135,7 @@ void quit(int signum) {
     printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
     printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
     printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
-    if (branch != "master") printf("%s <%s>\n\n", version.c_str(), __branch.c_str());
+    if (branch != "master") printf("%s <%s>\n\n", version.c_str(), branch.c_str());
     else                    printf("%s\n\n", version.c_str());
     //printf(", compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
@@ -210,7 +209,7 @@ void usage() {
     puts("--branch=master    : default branch");
     puts("         dev       : developing branch, new and experimental");
     puts("         compatible: compatible branch, for older OS, without GNU-readline");
-    if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), __branch.c_str());
+    if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
     else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
@@ -218,7 +217,7 @@ void usage() {
 }
 
 void check_version() {
-    if (branch != "master") printf(BOLD "%s" NONE "%s\n", version.c_str(), __branch.c_str());
+    if (branch != "master") printf(BOLD "%s" NONE "%s\n", version.c_str(), branch.c_str());
     else                    printf(BOLD "%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
     start_update();
