@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.2" NONE;
+string version = UNDERLINE "rumrumgib v5.6.6" NONE;
 string branch = "compatible";
 
 string readline(string prompt) {
@@ -162,7 +162,7 @@ char judge_pause() {
 
 char answer_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
-    puts(NONE GRAY"(press [i] to check input file, [d] to diff output file)" NONE);
+    puts(NONE GRAY"(press [i] to check input file, [d] to use vim to diff output file)" NONE);
     char c;
     if (always_continue) return 'c';
     if (always_quit) return 'q';
@@ -196,10 +196,9 @@ void start_forced_update() {
 
 void usage(int id) {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-vlcqsfuh] [--save=] [--branch=]\n");
+    puts("\nchecker [$problem_name] [-hscqvu] [--save=] [--branch=]\n");
     puts("-h: display this help and quit");
     puts("-s: slow mode");
-    puts("-f: fast mode");
     puts("-c: always continue when error occurs");
     puts("-q: always quit when error occurs");
     puts("-v: check version and quit");
@@ -235,8 +234,7 @@ string getword(string s, int &pos) {
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] != '=') usage(1);
-    pos++;
+    if (s[pos] == '=') pos++;
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
@@ -248,6 +246,7 @@ void analysis_long_cmd(string s, int &pos) {
         } else {
             printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
             printf("Try this command: 'checker -h'\n");
+            start_update();
             exit(1);
         }
     } else if (key == "branch") {
@@ -255,8 +254,9 @@ void analysis_long_cmd(string s, int &pos) {
         printf("changed branch to <%s>.\n", branch.c_str());
         start_update();
     } else {
-        printf("Invalid option " RED "%s" NONE " !\n", key.c_str());
+        printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
         printf("Try this command: 'checker -h'\n");
+        start_update();
         exit(1);
     }
 }
@@ -268,13 +268,13 @@ void analysis_cmd(string cmd)  {
             case 'q': always_continue = 0, always_quit = 1; break;
             case 'v': check_version(); break;
             case 's': fast_mode = 0; break;
-            case 'f': fast_mode = 1; break;
             case 'u': start_forced_update(); break;
             case 'h': usage(0); break;
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
-                printf("Invalid option " RED "%c" NONE " !\n", cmd[i]);
+                printf("Invalid option " RED "-%c" NONE " !\n", cmd[i]);
                 printf("Try this command: 'checker -h'\n");
+                start_update();
                 exit(1);
                 break;
         }
