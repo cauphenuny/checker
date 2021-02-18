@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.8" NONE;
+string version = UNDERLINE "checker v5.6.9" NONE;
 string branch = "master";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
@@ -160,7 +160,7 @@ void register_signal() {
 }
 
 bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1;
-int save_mode;
+int save_mode = 2;
 
 char judge_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
