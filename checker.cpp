@@ -228,7 +228,7 @@ void usage(int id) {
     puts("         dev       : developing branch, new and experimental");
     puts("         compatible: compatible branch, for older OS, without GNU-readline\n");
     puts("--mode=normal: normal mode(default)");
-    puts("       data  : create data mode");
+    puts("       data  : data mode");
     if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
     else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
