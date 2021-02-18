@@ -19,8 +19,10 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.6.6" NONE;
+string version = UNDERLINE "checker v5.6.9" NONE;
 string branch = "compatible";
+const string config_dir = ".config/";
+const string data_dir = ".data/";
 
 string readline(string prompt) {
     printf("%s", prompt.c_str());
@@ -60,14 +62,19 @@ void bash_fail() {
 }
 
 void store_data(int T, string data, string sc1, string sc2, string prob, int time) {
-    string file = ".config/" + prob + ".cfg";
+    string file = config_dir + prob;
+    //string file = config_dir + prob + ".cfg";
     ofstream filestream(file.c_str());
     filestream << T << endl << data << endl << sc1 << endl << sc2 << endl << prob << endl << time << endl;
     filestream.close();
 }
 
 void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time) {
-    string infile = prob + ".cfg";
+    string infile_old = prob + ".cfg";
+    string infile = prob;
+    if (access(infile_old.c_str(), F_OK) == 0) {
+        run("mv " + infile_old + " " + infile);
+    }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
         printf("Failed!");
@@ -82,7 +89,11 @@ void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int 
 }
 
 bool check_file(string prob) {
-    string infile = prob + ".cfg";
+    string infile_old = prob + ".cfg";
+    string infile = prob;
+    if (access(infile_old.c_str(), F_OK) == 0) {
+        run("mv " + infile_old + " " + infile);
+    }
     ifstream filestream(infile.c_str());
     if (filestream.fail()) {
         filestream.close();
@@ -148,8 +159,8 @@ void register_signal() {
     }
 }
 
-bool always_load, always_continue, always_quit, fast_mode = 1;
-int save_mode;
+bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1;
+int save_mode = 2;
 
 char judge_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
@@ -245,7 +256,7 @@ void analysis_long_cmd(string s, int &pos) {
             save_mode = 3;
         } else {
             printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
-            printf("Try: 'checker -h'\n");
+            printf("Try 'checker -h' to learn more info.\n");
             start_update();
             exit(1);
         }
@@ -255,7 +266,7 @@ void analysis_long_cmd(string s, int &pos) {
         start_update();
     } else {
         printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
-        printf("Try: 'checker -h'\n");
+        printf("Try 'checker -h' to learn more info.\n");
         start_update();
         exit(1);
     }
@@ -273,7 +284,7 @@ void analysis_cmd(string cmd)  {
             case '-': analysis_long_cmd(cmd, i), i--; break;
             default:
                 printf("Invalid option " RED "-%c" NONE " !\n", cmd[i]);
-                printf("Try: 'checker -h'\n");
+                printf("Try 'checker -h' to learn more info.\n");
                 start_update();
                 exit(1);
                 break;
@@ -294,17 +305,20 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-    while(prob == "") prob = readline("name of the problem: ");
-    if (access(".data", F_OK) != 0 || !isdir(".data"))
-        if (system("mkdir .data")) bash_fail();
-    if (access(".config", F_OK) != 0 || !isdir(".config"))
-        if (system("mkdir .config")) bash_fail();
+    if (access(data_dir.c_str(), F_OK) != 0 || !isdir(data_dir.c_str()))
+        if (run("mkdir " + data_dir)) bash_fail();
+    if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
+        if (run("mkdir " + config_dir)) bash_fail();
+    chdir(config_dir.c_str());
+    while (prob == "") prob = readline("name of the problem: ");
+    chdir("..");
+    while (prob[prob.length() - 1] == ' ') prob.pop_back();
     //system("clear");
     int flag = 1;
-    string probcfg = ".config/" + prob;
+    string probcfg = config_dir + prob;
     if (check_file(probcfg)) {
         if (!always_load) {
-            printf("\nFinded the problem file " GREEN"\"%s.cfg\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
+            printf("\nFinded the problem file " GREEN"\"%s\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
             char c = getchar();
             if (c == 'y') {
                 puts("\nloading...");
@@ -319,7 +333,7 @@ int main(int argc, char *argv[]) {
     }
     if (flag) {
         //system("clear");
-        printf("Test Cases: ");
+        printf("amount of detection: ");
         scanf("%d", &T);
         do dtm = readline("name of generator: "); while (dtm == "");
         do sc1 = readline("name of source1: "); while (sc1 == "");
@@ -331,7 +345,7 @@ int main(int argc, char *argv[]) {
         puts("");
     }
     judge:
-    file = ".data/" + prob + "/";
+    file = data_dir + prob + "/";
     if (run("rm -rf ./" + file)) bash_fail();
     if (run("mkdir " + file)) bash_fail();
     string dataprogram = file + "data";
@@ -630,5 +644,4 @@ int main(int argc, char *argv[]) {
     quit(0);
     return 0;
 }
-
 
