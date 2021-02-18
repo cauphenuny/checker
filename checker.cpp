@@ -32,7 +32,7 @@ string readline(string prompt) {
 }
 
 void clear_buffer() {
-    setbuf(stdin, nullptr);
+    //setbuf(stdin, nullptr);
 }
 
 long long myclock() {
