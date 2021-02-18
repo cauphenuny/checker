@@ -453,6 +453,7 @@ void create_data() {
             printf("\n" L_GREEN "Skiped.\n" NONE);
             run("sleep 0.1");
         } else {
+            cout << in << endl;
             system("sleep 100");
         }
         printf(GRAY"in:  %s\n" NONE, in.c_str());
