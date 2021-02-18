@@ -334,7 +334,10 @@ int main(int argc, char *argv[]) {
     if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
         if (run("mkdir " + config_dir)) bash_fail();
     chdir(config_dir.c_str());
-    while (prob == "") prob = readline("name of the problem: ");
+    if (prob == "") {
+        while (prob == "") prob = readline("name of the problem: ");
+        getchar();
+    }
     chdir("..");
     while (prob[(int)prob.length() - 1] == ' ') prob.pop_back();
     //system("clear");
