@@ -396,7 +396,7 @@ void create_data() {
     }
     file = data_dir + prob + "/";
     if (access(file.c_str(), F_OK) == 0) {
-        printf("clear data? [y/n]: ");
+        printf("clear data? " GRAY "[y/n] " NONE);
         char c; cin >> c;
         if (c == 'y') {
             if (run("rm -rf ./" + file)) bash_fail();
