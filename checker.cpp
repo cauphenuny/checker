@@ -31,6 +31,10 @@ string readline(string prompt) {
     return res;
 }
 
+void clear_buffer() {
+    setbuf(stdin, nullptr);
+}
+
 long long myclock() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
@@ -338,6 +342,7 @@ int main(int argc, char *argv[]) {
     string probcfg = config_dir + prob;
     if (check_file(probcfg)) {
         if (!always_load) {
+            clear_buffer();
             printf("\nFinded the problem file " GREEN"\"%s\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
             char c = getchar();
             if (c == 'y') {
