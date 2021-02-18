@@ -160,7 +160,7 @@ void register_signal() {
 }
 
 bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1;
-int save_mode = 2;
+int save_mode = 2; //1=always, 2=auto, 3=never
 
 char judge_pause() {
     puts(NONE GRAY"\n(press [c] to continue, [r] to rejudge, [q] to quit)" NONE);
