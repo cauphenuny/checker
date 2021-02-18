@@ -447,8 +447,8 @@ void create_data() {
         system("clear");
         long long  a_time, b_time, s_time, t_time;
         printf(NONE"Test #%d\n", i);
-        string in = file + tostring(i) + ".in ";
-        string ans = file + tostring(i) + ".out ";
+        string in = file + tostring(i) + ".in";
+        string ans = file + tostring(i) + ".out";
         if (access(in.c_str(), F_OK) == 0) {
             printf("\n" L_GREEN "Skiped.\n" NONE);
             run("sleep 0.1");
