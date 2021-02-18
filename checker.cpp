@@ -14,22 +14,22 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include <readline/history.h>
-#include <readline/readline.h>
+//#include <readline/history.h>
+//#include <readline/readline.h>
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v6.0.0_alpha" NONE;
+string version = UNDERLINE "checker v6.0.0" NONE;
 string branch = "dev";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
 
-//string readline(string prompt) {
-//    printf("%s", prompt.c_str());
-//    string res;
-//    cin >> res;
-//    return res;
-//}
+string readline(string prompt) {
+    printf("%s", prompt.c_str());
+    string res;
+    cin >> res;
+    return res;
+}
 
 long long myclock() {
     struct timeval tv;
