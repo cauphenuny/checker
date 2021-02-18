@@ -401,7 +401,9 @@ void create_data() {
         if (c == 'y') {
             if (run("rm -rf ./" + file)) bash_fail();
             if (run("mkdir " + file)) bash_fail();
+            puts("cleared.");
         }
+        putchar('\n');
     } else {
         if (run("mkdir -p " + file)) bash_fail();
     }
