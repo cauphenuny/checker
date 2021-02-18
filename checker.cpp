@@ -397,6 +397,8 @@ void create_data() {
             if (run("rm -rf ./" + file)) bash_fail();
             if (run("mkdir " + file)) bash_fail();
         }
+    } else {
+        if (run("mkdir -p " + file)) bash_fail();
     }
     string dataprogram = file + "data";
     string ansprogram = file + "std";
