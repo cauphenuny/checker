@@ -450,6 +450,8 @@ void create_data() {
         if (access(in.c_str(), F_OK) == 0) {
             printf("\n" L_GREEN "Skiped.\n" NONE);
             run("sleep 0.1");
+        } else {
+            system("sleep 100");
         }
         printf(GRAY"in:  %s\n" NONE, in.c_str());
         printf(GRAY"ans: %s\n" NONE, ans.c_str());
