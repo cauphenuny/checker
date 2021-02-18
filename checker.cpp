@@ -165,7 +165,7 @@ void register_signal() {
     }
 }
 
-bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1;
+bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1, loaded = 0;
 int save_mode = 2; //1=always, 2=auto, 3=never
 int general_mode = 1; //1=normal, 2=data
 
@@ -348,11 +348,13 @@ int main(int argc, char *argv[]) {
             if (c == 'y') {
                 puts("\nloading...");
                 load_data(T, dtm, sc1, sc2, probcfg, timelimit);
+                loaded = true;
                 flag = 0;
             }
         } else {
             printf("loading problem " GREEN "%s" NONE " ...\n\n", prob.c_str());
             load_data(T, dtm, sc1, sc2, probcfg, timelimit);
+            loaded = true;
             flag = 0;
         }
     }
@@ -385,7 +387,7 @@ int main(int argc, char *argv[]) {
 
 void create_data() {
     create_judge:
-    if (always_load == true) {
+    if (loaded == true) {
         printf("amount of detection: ");
         scanf("%d", &T);
     }
@@ -448,7 +450,6 @@ void create_data() {
         }
         printf(GRAY"in:  %s\n" NONE, in.c_str());
         printf(GRAY"ans: %s\n" NONE, ans.c_str());
-        printf(HIDE"\n");
         int errorflag = 0;
         int ret;
         if (access(dataprogram.c_str(), F_OK) != 0) {
@@ -491,7 +492,6 @@ void create_data() {
                 goto create_judge;
             }
         }
-        printf(HIDE"\n");
         a_time = myclock();
         ret = run("./" + ansprogram + " < " + in + " 1> " + ans + " 2> /dev/null");
         b_time = myclock();
