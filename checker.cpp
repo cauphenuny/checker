@@ -222,7 +222,7 @@ void usage(int id) {
     puts("       never : never save file\n");
     puts("--branch=master    : default branch");
     puts("         dev       : developing branch, new and experimental");
-    puts("         compatible: compatible branch, for older OS, without GNU-readline");
+    puts("         compatible: compatible branch, for older OS, without GNU-readline\n");
     puts("--mode=normal: normal mode(default)");
     puts("       data  : create data mode");
     if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
