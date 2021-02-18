@@ -210,7 +210,7 @@ void start_forced_update() {
 
 void usage(int id) {
     puts("usage: ");
-    puts("\nchecker [$problem_name] [-hscqvu] [--save=] [--branch=]\n");
+    puts("\nchecker [$problem_name] [-hscqvu] [--save=] [--branch=] [--mode=]\n");
     puts("-h: display this help and quit");
     puts("-s: slow mode");
     puts("-c: always continue when error occurs");
@@ -223,6 +223,8 @@ void usage(int id) {
     puts("--branch=master    : default branch");
     puts("         dev       : developing branch, new and experimental");
     puts("         compatible: compatible branch, for older OS, without GNU-readline");
+    puts("--mode=normal: normal mode(default)");
+    puts("       data  : create data mode");
     if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
     else printf(BOLD "\n%s\n" NONE, version.c_str());
     printf("compiled at %s %s\n", __TIME__, __DATE__);
