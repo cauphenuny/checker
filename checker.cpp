@@ -19,7 +19,7 @@
 #include "color.h"
 using namespace std;
 
-string version = UNDERLINE "checker v6.0.3" NONE;
+string version = UNDERLINE "checker v5.7.3" NONE;
 string branch = "dev";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
