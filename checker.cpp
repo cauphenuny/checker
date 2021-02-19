@@ -359,12 +359,12 @@ int main(int argc, char *argv[]) {
         compile_error += 1;
     }
     printf("compiling \"%s\" ...\n", sc1.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE" + sc1 + " -o " + outprogram);
+    gccret = run("g++ -DLOCAL_JUDGE " + sc1 + " -o " + outprogram);
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
     printf("compiling \"%s\" ...\n", sc2.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE" + sc2 + " -o " + ansprogram);
+    gccret = run("g++ -DLOCAL_JUDGE " + sc2 + " -o " + ansprogram);
     if (WEXITSTATUS(gccret)) {
         compile_error += 4;
     }
