@@ -145,10 +145,11 @@ void quit(int signum) {
     }
     if (eflag) puts("");
     printf("Total Result:\n");
-    printf(L_GREEN"Accepted" NONE" %d\n", ac);
-    printf(L_RED"Wrong Answer" NONE" %d\n", wa);
-    printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
-    printf(L_PURPLE"Runtime Error" NONE" %d\n\n", re);
+    if (ac) printf(L_GREEN"Accepted" NONE" %d\n", ac);
+    if (wa) printf(L_RED"Wrong Answer" NONE" %d\n", wa);
+    if (tle)printf(L_BLUE"Time Limit Exceeded" NONE" %d\n", tle);
+    if (re) printf(L_PURPLE"Runtime Error" NONE" %d\n", re);
+    puts("");
     if (global_time1 != 0 && global_time2 != 0) {
         printf("total time: %dms / %dms (%.2lf%%)\n\n", global_time1, global_time2, (double)global_time1 / global_time2 * 100);
     }
