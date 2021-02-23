@@ -1,4 +1,9 @@
 #!/bin/sh
+if [ ! $(command -v wget) ]; then
+    echo "please install wget"
+    exit 0
+fi
+
 if [ -f  /bin/checker ]; then
     echo "Warning: remove /bin/checker"
     sudo rm /bin/checker
@@ -14,9 +19,6 @@ fi
 if [ -f ~/.ycpedef_checker_source ]; then
     rm -rf ~/.ycpedef_checker_source
 fi
-
-echo "installing dependencies ..."
-sudo apt install -y git wget vim 1>/dev/null 2>/dev/null
 
 echo "download file ..."
 rm -rf ~/.ycpedef_checker_source/
