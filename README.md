@@ -25,4 +25,4 @@ checker -h
 - [ ] 支持程序使用文件IO
 
 ---
-Supported operating system: Ubuntu 16.04 or later.
+Supported operating system: linux.
