@@ -6,8 +6,8 @@
 #include "main.h"
 using namespace std;
 
-string version = UNDERLINE "checker v6.0.0" NONE;
-string branch = "dev";
+string version = UNDERLINE "checker v5.7.4" NONE;
+string branch = "master";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
 
