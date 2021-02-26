@@ -1,0 +1,10 @@
+#include <ctime>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <string>
+#include "color.h"

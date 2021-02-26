@@ -3,126 +3,11 @@
  * email: ycpedef@foxmail.com                    *
  * Copyright ycpedef 2020-2021.                  *
  * * * * * * * * * * * * * * * * * * * * * * * * */
-#include <cstdio>
-#include <iostream>
-#include <ctime>
-#include <cstring>
-#include <fstream>
-#include <cstdlib>
-#include <csignal>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-//#include <readline/history.h>
-//#include <readline/readline.h>
-#include "color.h"
+#include "main.h"
 using namespace std;
-
-string version = UNDERLINE "checker v5.7.5" NONE;
-string branch = "dev";
-const string config_dir = ".config/";
-const string data_dir = ".data/";
-
-string readline(string prompt) {
-    printf("%s", prompt.c_str());
-    string res;
-    cin >> res;
-    return res;
-}
-
-void clear_buffer() {
-    //setbuf(stdin, nullptr);
-}
-
-long long myclock() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
-}
-
-string tostring(int a) {
-    char s[256];
-    memset(s, 0, sizeof(s));
-    int tot = 0;
-    while (a > 0) {
-        s[tot] = (a % 10) + '0';
-        tot++;
-        a /= 10;
-    }
-    for (int i = 0; i < (tot / 2); i++) {
-        swap(s[i], s[tot - 1 - i]);
-    }
-    return s;
-}
-
-int run(string s) {
-    return system(s.c_str());
-}
-
-void bash_fail() {
-    puts(L_RED"\nFailed");
-    exit(0);
-}
-
-void store_data(int T, string data, string sc1, string sc2, string prob, int time) {
-    string file = config_dir + prob;
-    //string file = config_dir + prob + ".cfg";
-    ofstream filestream(file.c_str());
-    filestream << T << endl << data << endl << sc1 << endl << sc2 << endl << prob << endl << time << endl;
-    filestream.close();
-}
-
-void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time) {
-    string infile_old = prob + ".cfg";
-    string infile = prob;
-    if (access(infile_old.c_str(), F_OK) == 0) {
-        run("mv " + infile_old + " " + infile);
-    }
-    ifstream filestream(infile.c_str());
-    if (filestream.fail()) {
-        printf("Failed!");
-        exit(0);
-    }
-    time = 0;
-    filestream >> T >> data >> sc1 >> sc2 >> prob >> time;
-    if (time == 0) {
-        time = 1000;
-    }
-    filestream.close();
-}
-
-bool check_file(string prob) {
-    string infile_old = prob + ".cfg";
-    string infile = prob;
-    if (access(infile_old.c_str(), F_OK) == 0) {
-        run("mv " + infile_old + " " + infile);
-    }
-    ifstream filestream(infile.c_str());
-    if (filestream.fail()) {
-        filestream.close();
-        return 0;
-    } else {
-        filestream.close();
-        return 1;
-    }
-}
-
-bool isdir(string filename) {
-    struct stat s_buf;
-    stat(filename.c_str(), &s_buf);
-    return S_ISDIR(s_buf.st_mode);
-}
-
-void delline() {
-    printf("\e[2A");
-    printf("\e[K");
-}
 
 string global_result = "";
 int global_time1 = 0, global_time2 = 0;
-
-void start_update();
 
 void quit(int signum) {
     system("clear");
@@ -189,130 +74,6 @@ char answer_pause() {
     return c;
 }
 
-void normal_exit(int signum) {
-    exit(0);
-}
-
-void auto_update() {
-    run("~/.ycpedef_checker_update/auto_update.sh " + branch);
-}
-
-void start_update() {
-    signal(SIGTERM, normal_exit);
-    atexit(auto_update);
-    exit(0);
-}
-
-void forced_update() {
-    run("~/.ycpedef_checker_update/forced_update.sh " + branch);
-}
-
-void start_forced_update() {
-    signal(SIGTERM, normal_exit);
-    atexit(forced_update);
-    exit(0);
-}
-
-void usage(int id) {
-    puts("usage: ");
-    puts("\nchecker [$problem_name] [-hscqvu] [--save=] [--branch=] [--mode=]\n");
-    puts("-h: display this help and quit");
-    puts("-s: slow mode");
-    puts("-c: always continue when error occurs");
-    puts("-q: always quit when error occurs");
-    puts("-v: check version and quit");
-    puts("-u: update\n");
-    puts("--save=auto  : save file only when error occurs (default)");
-    puts("       always: always save input and output file");
-    puts("       never : never save file\n");
-    puts("--branch=master    : default branch");
-    puts("         dev       : developing branch, new and experimental");
-    puts("         compatible: compatible branch, for older OS, without GNU-readline\n");
-    puts("--mode=normal: normal mode(default)");
-    puts("       data  : data mode");
-    if (branch != "master") printf(BOLD "\n%s" NONE " <%s>\n", version.c_str(), branch.c_str());
-    else printf(BOLD "\n%s\n" NONE, version.c_str());
-    printf("compiled at %s %s\n", __TIME__, __DATE__);
-    start_update();
-    exit(id);
-}
-
-void check_version() {
-    if (branch != "master") printf(BOLD "%s" NONE " <%s>\n", version.c_str(), branch.c_str());
-    else                    printf(BOLD "%s\n" NONE, version.c_str());
-    printf("compiled at %s %s\n", __TIME__, __DATE__);
-    start_update();
-    exit(0);
-}
-
-string getword(string s, int &pos) {
-    string res = "";
-    while (isalpha(s[pos]))
-        res += s[pos], pos++;
-    return res;
-}
-
-void analysis_long_cmd(string s, int &pos) {
-    pos++;
-    string key = getword(s, pos);
-    if (s[pos] == '=') pos++;
-    string value = getword(s, pos);
-    if (key == "save") {
-        if (value == "always") {
-            save_mode = 1;
-        } else if (value == "auto") {
-            save_mode = 2;
-        } else if (value == "never") {
-            save_mode = 3;
-        } else {
-            printf("Invalid save mode " RED "%s" NONE " !\n", value.c_str());
-            printf("Try 'checker -h' to learn more info.\n");
-            start_update();
-            exit(1);
-        }
-    } else if (key == "branch") {
-        branch = value;
-        printf("changed branch to <%s>.\n", branch.c_str());
-        start_update();
-    } else if (key == "mode") {
-        if (value == "normal") {
-            general_mode = 1;
-        } else if (value == "data") {
-            general_mode = 2;
-        } else {
-            printf("Invalid mode " RED "%s" NONE " !\n", value.c_str());
-            printf("Try 'checker -h' to learn more info.\n");
-            start_update();
-            exit(1);
-        }
-    } else {
-        printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
-        printf("Try 'checker -h' to learn more info.\n");
-        start_update();
-        exit(1);
-    }
-}
-
-void analysis_cmd(string cmd)  {
-    for (int i = 1; i < (int)cmd.length(); i++) {
-        switch (cmd[i]) {
-            case 'c': always_continue = 1, always_quit = 0; break;
-            case 'q': always_continue = 0, always_quit = 1; break;
-            case 'v': check_version(); break;
-            case 's': fast_mode = 0; break;
-            case 'u': start_forced_update(); break;
-            case 'h': usage(0); break;
-            case '-': analysis_long_cmd(cmd, i), i--; break;
-            default:
-                printf("Invalid option " RED "-%c" NONE " !\n", cmd[i]);
-                printf("Try 'checker -h' to learn more info.\n");
-                start_update();
-                exit(1);
-                break;
-        }
-    }
-}
-
 void normal_judge();
 void create_data();
 
@@ -346,7 +107,7 @@ int main(int argc, char *argv[]) {
     string probcfg = config_dir + prob;
     if (check_file(probcfg)) {
         if (!always_load) {
-            clear_buffer();
+            //clear_buffer();
             printf("\nFinded the problem file " GREEN"\"%s\"" NONE" . \nDo you want to load the file? " GRAY"[y/n] " NONE, prob.c_str());
             char c = getchar();
             if (c == 'y') {
