@@ -1,4 +1,5 @@
 #!/bin/sh
+cd ..
 echo "compile ..."
-../compile.sh
-./upload.sh
+g++ *.cpp -o checker -lreadline
+upload/upload.sh
