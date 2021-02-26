@@ -19,7 +19,7 @@ void load_data(int &T, std::string &data, std::string &sc1, std::string &sc2, st
 bool check_file(std::string prob);
 int limited_run(std::string name, int time_limit, int memory_limit);
 
-//tools.cpp
+//func.cpp
 void clear_buffer();
 long long myclock();
 std::string tostring(int a);
