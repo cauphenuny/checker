@@ -25,5 +25,9 @@ checker -h
 - [ ] 数据模式
 - [ ] 支持程序使用文件IO
 
+## Compile environment:
+```
+g++ -DLOCAL_JUDGE $.cpp -o $
+```
 ---
 Supported operating system: Ubuntu 20.04
