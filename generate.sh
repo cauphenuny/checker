@@ -1,3 +1,3 @@
 #!/bin/sh
-../compile.sh
+./compile.sh
 ./upload.sh
