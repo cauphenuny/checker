@@ -1,3 +1,8 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * author: ycpedef | https://ycpedef.github.io   *
+ * email: ycpedef@foxmail.com                    *
+ * Copyright ycpedef 2020-2021.                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * */
 #include "quit.h"
 
 void quit(int signum) {
