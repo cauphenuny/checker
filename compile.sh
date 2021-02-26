@@ -1,17 +1,13 @@
 #!/bin/bash
 echo "compiling..."
-g++ -c *.cpp
-if [ $? != 0 ]; then
-    echo -e "\nFailed."
-    exit 1
-fi
+ls *.cpp | xargs -I % bash -c 'echo compiling % ... && g++ -c %'
 echo "linking..."
 g++ -o checker *.o
 if [ $? != 0 ]; then
     echo -e "\nFailed."
     exit 1
 fi
-echo "delete file..."
+echo "delete *.o files ..."
 rm *.o
 if [ $? != 0 ]; then
     echo -e "\nFailed."
