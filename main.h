@@ -14,10 +14,10 @@
 using std::string;
 
 //constants
-string version = UNDERLINE "checker v6.0.0" NONE;
-string branch = "dev";
-const string config_dir = ".config/";
-const string data_dir = ".data/";
+extern string version;
+extern string branch;
+extern const string config_dir;
+extern const string data_dir;
 
 //config.cpp
 void store_data(int, string, string, string, string, int);

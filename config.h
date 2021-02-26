@@ -11,6 +11,8 @@
 #include <sys/time.h>
 #include "color.h"
 
+using std::string;
+
 //config.cpp
 void store_data(int, std::string, std::string, std::string, std::string, int);
 void load_data(int &T, std::string &data, std::string &sc1, std::string &sc2, std::string prob, int &time);
