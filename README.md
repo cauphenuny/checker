@@ -1,1 +1,3 @@
 developing...
+
+Current version: 5.7
