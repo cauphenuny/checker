@@ -1,5 +1,5 @@
 # Checker
-A useful and convenient checker for OI
+A useful and convenient checker for OI, **developing branch**, new and experimental.
 
 ## Install
 ```bash
