@@ -65,7 +65,6 @@ void bash_fail() {
     exit(0);
 }
 
-#define VMRSS_LINE 21  // VMRSS所在行, 注:根据不同的系统,位置可能有所区别.
 #define pid_t int
 int get_memory_by_pid(pid_t p) {
     FILE* fd;

@@ -1,7 +1,7 @@
 #!/bin/bash
-echo "compiling..."
+echo "compiling ..."
 ls *.cpp | xargs -I % bash -c 'echo compiling % ... && g++ -c %'
-echo "linking..."
+echo "linking ..."
 g++ -o checker -lreadline *.o
 if [ $? != 0 ]; then
     echo -e "\nFailed."
