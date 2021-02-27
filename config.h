@@ -14,29 +14,29 @@
 using std::string;
 
 //config.cpp
-void store_data(int, std::string, std::string, std::string, std::string, int);
-void load_data(int &T, std::string &data, std::string &sc1, std::string &sc2, std::string prob, int &time);
-bool check_file(std::string prob);
-int limited_run(std::string name, int time_limit, int memory_limit);
+extern void store_data(int, std::string, std::string, std::string, std::string, int);
+extern void load_data(int &T, std::string &data, std::string &sc1, std::string &sc2, std::string prob, int &time);
+extern bool check_file(std::string prob);
+extern int limited_run(std::string name, int time_limit, int memory_limit);
 
 //func.cpp
-void clear_buffer();
-long long myclock();
-std::string tostring(int a);
-int run(std::string s);
-bool isdir(std::string filename);
-void delline();
-void bash_fail();
+extern void clear_buffer();
+extern long long myclock();
+extern std::string tostring(int a);
+extern int run(std::string s);
+extern bool isdir(std::string filename);
+extern void delline();
+extern void bash_fail();
 
 //myreadline.cpp
-std::string readline(std::string prompt);
+extern std::string readline(std::string prompt);
 
 //update.cpp
-void start_update();
-void start_forced_update();
-void forced_update();
-void auto_update();
-void normal_exit(int signum);
+extern void start_update();
+extern void start_forced_update();
+extern void forced_update();
+extern void auto_update();
+extern void normal_exit(int signum);
 
 //constants
 extern std::string version;

@@ -8,7 +8,7 @@
 using std::string;
 
 //update.cpp
-void start_update();
+extern void start_update();
 
 //constants
 extern string version;

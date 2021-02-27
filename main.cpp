@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+
     if (access(data_dir.c_str(), F_OK) != 0 || !isdir(data_dir.c_str()))
         if (run("mkdir " + data_dir)) bash_fail();
     if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
@@ -42,6 +43,7 @@ int main(int argc, char *argv[]) {
     }
     chdir("..");
     while (prob[(int)prob.length() - 1] == ' ') prob.pop_back();
+
     //system("clear");
     int flag = 1;
     string probcfg = config_dir + prob;
