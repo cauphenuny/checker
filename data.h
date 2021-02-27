@@ -10,6 +10,13 @@
 
 using std::string;
 
+#ifndef COMPATIBLE
+#   include <readline/history.h>
+#   include <readline/readline.h>
+#else
+    extern std::string readline(std::string prompt);
+#endif
+
 //constants
 extern string version;
 extern string branch;
