@@ -21,6 +21,7 @@ int T, timelimit;
 string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
 
 int main(int argc, char *argv[]) {
+// analysis command
     if (argc >= 2) {
         for (int i = 1, prof = 0; i < argc; i++) {
             if (argv[i][0] != '-') {
@@ -32,6 +33,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+// mkdir
     if (access(data_dir.c_str(), F_OK) != 0 || !isdir(data_dir.c_str()))
         if (run("mkdir " + data_dir)) bash_fail();
     if (access(config_dir.c_str(), F_OK) != 0 || !isdir(config_dir.c_str()))
@@ -44,7 +46,7 @@ int main(int argc, char *argv[]) {
     chdir("..");
     while (prob[(int)prob.length() - 1] == ' ') prob.pop_back();
 
-    //system("clear");
+// load problem
     int flag = 1;
     string probcfg = config_dir + prob;
     if (check_file(probcfg)) {
@@ -84,6 +86,8 @@ int main(int argc, char *argv[]) {
         getchar();
         puts("");
     }
+
+// start main function
     if (general_mode == 1) {
         normal_judge();
     } else {
