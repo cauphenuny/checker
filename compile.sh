@@ -1,7 +1,7 @@
 #!/bin/bash
 ls *.cpp | xargs -t -I % g++ -c %
 echo 'g++ -o checker -lreadline *.o'
-g++ -o checker -lreadline *.o
+g++ -o checker -static -lreadline *.o
 if [ ! $? ]; then exit 1; fi
 ls *.o | xargs -t -I % rm %
 if [ ! $? ]; then exit 1; fi
