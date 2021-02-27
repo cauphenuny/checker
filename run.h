@@ -12,5 +12,5 @@
 #include "color.h"
 
 //func.cpp
-//int run(std::string s);
+int run(std::string s);
 
