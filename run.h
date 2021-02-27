@@ -10,3 +10,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include "color.h"
+
+//func.cpp
+//int run(std::string s);
+

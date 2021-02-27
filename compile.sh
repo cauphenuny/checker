@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "compiling ..."
-ls *.cpp | xargs -I % bash -c 'echo compiling % ... && g++ -c %'
+ls *.cpp | xargs -I % bash -c 'echo compiling % ... && g++ -c %; if [ $? != 0 ]; then exit 1; fi'
 echo "linking ..."
 g++ -o checker -lreadline *.o
 if [ $? != 0 ]; then
