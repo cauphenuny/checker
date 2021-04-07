@@ -17,6 +17,7 @@ cd /tmp/checker/source
 make
 
 echo -e "\e[1;32m[move file] \e[0m"
+killall checker
 if [ -f /tmp/checker/source/copy.sh ]; then
     /tmp/checker/source/copy.sh
 fi

@@ -42,7 +42,6 @@ void quit(int signum) {
 }
 
 void register_signal() {
-    for (int i = 1; i <= 64; i++) {
-        if (i != 17) signal(i, quit);
-    }
+    signal(SIGINT, quit);
+    signal(SIGTERM, exit);
 }

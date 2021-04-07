@@ -22,6 +22,7 @@ void start_update() {
 
 void forced_update() {
     run("/tmp/checker/update/update.sh " + branch);
+    exit(0);
 }
 
 void start_forced_update() {

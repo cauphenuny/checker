@@ -3,10 +3,11 @@ obj = $(src:%.cpp=%.o)
 target = checker
 CXX = g++
 CXXFLAGS = -Wall
+CPPFLAGS = 
 LDFLAGS = -lreadline
 
 %.o: %.cpp %.h
-	$(CXX) -c $< -o $@ $(CXXFLAGS)
+	$(CXX) -c $< -o $@ $(CXXFLAGS) $(CPPFLAGS)
 
 $(target): $(obj)  
 	$(CXX) $(obj) -o $(target) $(LDFLAGS)

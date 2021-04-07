@@ -23,8 +23,8 @@ checker -h
 - [x] 自动补全 (v5.5)
 - [x] 长命令选项 (v5.6)
 - [x] 数据模式 (v5.7)
+- [x] 支持程序使用文件IO (v5.8)
 - [ ] 使用 `fork()` 和 `execvp()` 重构
-- [ ] 支持程序使用文件IO
 
 
 ## Compile environment:

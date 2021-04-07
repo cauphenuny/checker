@@ -45,10 +45,13 @@ string getword(string s, int &pos) {
     return res;
 }
 
+void edit_configure(string prob) {
+}
+
 void analysis_long_cmd(string s, int &pos) {
     pos++;
     string key = getword(s, pos);
-    if (s[pos] == '=') pos++;
+    while (!isalpha(s[pos]) && pos < (int)s.length() - 1) pos++;
     string value = getword(s, pos);
     if (key == "save") {
         if (value == "always") {
@@ -78,6 +81,8 @@ void analysis_long_cmd(string s, int &pos) {
             start_update();
             exit(1);
         }
+    } else if (key == "config") {
+        edit_configure(value);
     } else {
         printf("Invalid option " RED "--%s" NONE " !\n", key.c_str());
         printf("Try 'checker -h' to learn more info.\n");
