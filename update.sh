@@ -11,10 +11,12 @@ wget https://gitee.com/yuanchenpu/checker/repository/archive/$1.zip
 unzip $1.zip
 cd checker/
 cp -r ./ /tmp/checker/source
+
+echo -e "\e[1;32m[compile] \e[0m"
 cd /tmp/checker/source
+make
 
 echo -e "\e[1;32m[move file] \e[0m"
-killall checker
 if [ -f /tmp/checker/source/copy.sh ]; then
     /tmp/checker/source/copy.sh
 fi
