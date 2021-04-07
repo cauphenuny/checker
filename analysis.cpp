@@ -66,7 +66,7 @@ void analysis_long_cmd(string s, int &pos) {
     } else if (key == "branch") {
         branch = value;
         printf("changed branch to <%s>.\n", branch.c_str());
-        start_update();
+        forced_update();
     } else if (key == "mode") {
         if (value == "normal") {
             general_mode = 1;

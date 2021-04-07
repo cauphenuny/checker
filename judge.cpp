@@ -96,9 +96,11 @@ void normal_judge() {
             out = out_with_id;
             ans = ans_with_id;
         }
-        printf(GRAY"in:  %s\n" NONE, in.c_str());
-        printf(GRAY"out: %s\n" NONE, out.c_str());
-        printf(GRAY"ans: %s\n" NONE, ans.c_str());
+        string runtime_in = file + prob + ".in ";
+        string runtime_out = file + prob + ".in ";
+        printf(GRAY"in:  %s( %s)\n" NONE, in.c_str(), runtime_in.c_str());
+        printf(GRAY"out: %s( %s)\n" NONE, out.c_str(), runtime_out.c_str());
+        printf(GRAY"ans: %s( %s)\n" NONE, ans.c_str(), runtime_out.c_str());
         printf(HIDE"\n");
         int errorflag = 0;
         int ret;
@@ -156,9 +158,11 @@ void normal_judge() {
                 goto judge;
             }
         }
+        run("cp " + in + runtime_in);
         a_time = myclock();
-        ret = run("./" + outprogram + " < " + in + " 1> " + out + " 2> /dev/null");
+        ret = run("./" + outprogram + " < " + runtime_in + " 1> " + runtime_out + " 2> /dev/null");
         b_time = myclock();
+        run("cp " + runtime_out + out);
         int time1 = b_time - a_time;
         if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE "Runtime Error!" NONE);
@@ -187,9 +191,11 @@ void normal_judge() {
             }
         }
         printf(HIDE"\n");
+        run("cp " + in + runtime_in);
         a_time = myclock();
-        ret = run("./" + ansprogram + " < " + in + " 1> " + ans + " 2> /dev/null");
+        ret = run("./" + ansprogram + " < " + runtime_in + " 1> " + runtime_out + " 2> /dev/null");
         b_time = myclock();
+        run("cp " + runtime_out + ans);
         if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE"Runtime Error!" NONE);
             errorflag = 2;
@@ -324,3 +330,4 @@ void normal_judge() {
     }
     quit(0);
 }
+

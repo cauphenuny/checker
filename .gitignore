@@ -1,2 +1,5 @@
 # ignore .git
 .git/
+*.o
+upload.sh
+

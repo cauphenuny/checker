@@ -6,11 +6,11 @@
 #include "func.h"
 using namespace std;
 
-#define COMPATIBLE
+//#define COMPATIBLE
 
 #ifndef COMPATIBLE
-#   include <readline/history.h>
-#   include <readline/readline.h>
+#   include "readline/history.h"
+#   include "readline/readline.h"
 #else
     std::string readline(std::string prompt) {
         printf("%s", prompt.c_str());
@@ -93,10 +93,9 @@ int get_total_mem() {
     FILE* fd;
     char line_buff[256] = {0};
     fd = fopen(file, "r");
-    int i;
     char name[32];
     int memtotal;
-    char* ret = fgets(line_buff, sizeof(line_buff), fd);
+    //char* ret = fgets(line_buff, sizeof(line_buff), fd);
     sscanf(line_buff, "%s %d", name, &memtotal);
     fprintf(stderr, "====%s：%d====\n", name, memtotal);
     fclose(fd);
