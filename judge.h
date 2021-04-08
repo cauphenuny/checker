@@ -5,10 +5,12 @@
 #include <fstream>
 #include <cstdlib>
 #include <csignal>
+#include <map>
 #include <unistd.h>
 #include "color.h"
 
 using std::string;
+using std::map;
 
 #ifndef COMPATIBLE
 #   include <readline/history.h>
@@ -27,15 +29,12 @@ extern const string data_dir;
 //variable
 extern string global_result;
 extern int global_time1, global_time2;
-extern int T, timelimit;
-extern string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
+extern map<string, string> config;
 extern bool always_load, always_continue, always_quit, fast_mode, loaded;
 extern int save_mode;
 extern int general_mode;
 
 //config.cpp
-extern void store_data(int, string, string, string, string, int);
-extern void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time);
 extern bool check_file(string prob);
 extern int limited_run(string name, int time_limit, int memory_limit);
 
@@ -54,3 +53,6 @@ extern string readline(string prompt);
 //quit.cpp
 extern void quit(int signum);
 extern void register_signal();
+
+//func.cpp
+extern int file_exists(string file);

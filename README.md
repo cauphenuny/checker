@@ -3,7 +3,7 @@ A useful and convenient checker for OI, **developing branch**, new and experimen
 
 ## Install
 ```bash
-./install.sh
+./install
 checker -v
 ```
 

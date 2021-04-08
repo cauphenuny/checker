@@ -14,9 +14,9 @@
 //update.cpp
 void start_update();
 void start_forced_update();
-void forced_update();
-void auto_update();
-void normal_exit(int signum);
+
+//func.cpp
+extern int run(std::string s);
 
 //main.cpp
 extern bool always_load, always_continue, always_quit, fast_mode, loaded;
@@ -24,3 +24,6 @@ extern int save_mode;
 extern int general_mode;
 extern std::string branch;
 extern std::string version;
+extern const std::string config_dir;
+extern const std::string data_dir;
+

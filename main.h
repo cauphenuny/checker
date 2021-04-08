@@ -2,9 +2,11 @@
 #include <iostream>
 #include <cstdio>
 #include <unistd.h>
+#include <map>
 #include "color.h"
 
 using std::string;
+using std::map;
 
 #ifndef COMPATIBLE
 #   include <readline/history.h>
@@ -22,21 +24,19 @@ extern const string data_dir;
 //variable
 extern string global_result;
 extern int global_time1, global_time2;
-extern int T, timelimit;
-extern string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
 extern bool always_load, always_continue, always_quit, fast_mode, loaded;
 extern int save_mode;
 extern int general_mode;
 
 //config.cpp
-extern void store_data(int, string, string, string, string, int);
-extern void load_data(int &T, string &data, string &sc1, string &sc2, string prob, int &time);
+extern void store_data(map<string, string>);
+extern void load_data(map<string, string>&, string);
 extern bool check_file(string prob);
 extern int limited_run(string name, int time_limit, int memory_limit);
 
 //func.cpp
 extern void clear_buffer();
-extern int run(string s);
+extern int run(string cmd);
 extern bool isdir(string filename);
 extern void bash_fail();
 

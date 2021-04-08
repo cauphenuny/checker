@@ -51,8 +51,8 @@ std::string tostring(int a) {
     return s;
 }
 
-int run(std::string s) {
-    return system(s.c_str());
+int run(std::string cmd) {
+    return system(cmd.c_str());
 }
 
 void delline() {
@@ -100,4 +100,8 @@ int get_total_mem() {
     fprintf(stderr, "====%s：%d====\n", name, memtotal);
     fclose(fd);
     return memtotal;
+}
+
+bool file_exists(string file) {
+    return (access(file.c_str(), F_OK) == 0);
 }

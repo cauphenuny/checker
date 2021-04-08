@@ -6,7 +6,7 @@
 #include "main.h"
 using namespace std;
 
-string version = UNDERLINE "checker v5.8.2" NONE;
+string version = UNDERLINE "checker v5.9.3" NONE;
 string branch = "dev";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
@@ -17,8 +17,10 @@ int global_time1 = 0, global_time2 = 0;
 bool always_load = 0, always_continue = 0, always_quit = 0, fast_mode = 1, loaded = 0;
 int save_mode = 2; //1=always, 2=auto, 3=never
 int general_mode = 1; //1=normal, 2=data
-int T, timelimit;
-string dtm, sc1, sc2, prob, file, dtm_exc, sc1_exc, sc2_exc;
+string T, timelimit, gen, src1, src2, prob, file;
+string probcfg;
+
+map<string, string> config;
 
 int main(int argc, char *argv[]) {
 // analysis command
@@ -41,14 +43,13 @@ int main(int argc, char *argv[]) {
     chdir(config_dir.c_str());
     if (prob == "") {
         while (prob == "") prob = readline("name of the problem: ");
-        getchar();
     }
     chdir("..");
     while (prob[(int)prob.length() - 1] == ' ') prob.pop_back();
 
 // load problem
     int flag = 1;
-    string probcfg = config_dir + prob;
+    probcfg = config_dir + prob;
     if (check_file(probcfg)) {
         if (!always_load) {
             //clear_buffer();
@@ -56,13 +57,13 @@ int main(int argc, char *argv[]) {
             char c = getchar();
             if (c == 'y') {
                 puts("\nloading...");
-                load_data(T, dtm, sc1, sc2, probcfg, timelimit);
+                load_data(config, prob);
                 loaded = true;
                 flag = 0;
             }
         } else {
             printf("loading problem " GREEN "%s" NONE " ...\n\n", prob.c_str());
-            load_data(T, dtm, sc1, sc2, probcfg, timelimit);
+            load_data(config, prob);
             loaded = true;
             flag = 0;
         }
@@ -70,19 +71,27 @@ int main(int argc, char *argv[]) {
     if (flag) {
         //system("clear");
         printf("amount of detection: ");
-        scanf("%d", &T);
+        cin >> T;
         if (general_mode == 1) {
-            do dtm = readline("name of generator: "); while (dtm == "");
-            do sc1 = readline("name of source1: "); while (sc1 == "");
-            do sc2 = readline("name of source2: "); while (sc2 == "");
+            do gen = readline("name of generator: "); while (gen == "");
+            do src1 = readline("name of source1: "); while (src1 == "");
+            do src2 = readline("name of source2: "); while (src2 == "");
         } else {
-            do dtm = readline("name of generator: "); while (dtm == "");
-            do sc1 = readline("name of std: "); while (sc1 == "");
-            sc2 = sc1;
+            do gen = readline("name of generator: "); while (gen == "");
+            do src1 = readline("name of std: "); while (src1 == "");
+            src2 = src1;
         }
         printf("time limit (ms): ");
         cin >> timelimit;
-        store_data(T, dtm, sc1, sc2, prob, timelimit);
+#define setconfig(x) config[#x] = x
+        setconfig(T);
+        setconfig(gen);
+        setconfig(src1);
+        setconfig(src2);
+        setconfig(prob);
+        setconfig(timelimit);
+#undef  setconfig
+        store_data(config);
         getchar();
         puts("");
     }

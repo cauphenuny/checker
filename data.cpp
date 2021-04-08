@@ -7,10 +7,20 @@
 using namespace std;
 
 void create_data() {
+    string T, gen, src1, src2, prob, file;
+    int amount;
+#define getconfig(x) x = config[#x]
+    getconfig(T), amount = stoi(T);
+    getconfig(gen);
+    getconfig(src1);
+    getconfig(src2);
+    getconfig(prob);
+    getconfig(file);
+#undef  getconfig
     create_judge:
     if (loaded == true) {
         printf("amount of detection: ");
-        scanf("%d", &T);
+        scanf("%d", &amount);
     }
     file = data_dir + prob + "/";
     if (access(file.c_str(), F_OK) == 0) {
@@ -28,21 +38,21 @@ void create_data() {
     string dataprogram = file + "data";
     string ansprogram = file + "std";
     int gccret = 0;
-    printf("compiling \"%s\" ...\n", dtm.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE " + dtm + " -o " + dataprogram);
+    printf("compiling \"%s\" ...\n", gen.c_str());
+    gccret = run("g++ -DLOCAL_JUDGE " + gen + " -o " + dataprogram);
     int compile_error = 0;
     if (WEXITSTATUS(gccret)) {
         compile_error += 1;
     }
-    printf("compiling \"%s\" ...\n", sc1.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE" + sc1 + " -o " + ansprogram);
+    printf("compiling \"%s\" ...\n", src1.c_str());
+    gccret = run("g++ -DLOCAL_JUDGE" + src1 + " -o " + ansprogram);
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
     if (compile_error) {
         printf("\n");
-        if (compile_error & 1) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, dtm.c_str());
-        if (compile_error & 2) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, sc1.c_str());
+        if (compile_error & 1) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, gen.c_str());
+        if (compile_error & 2) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, src1.c_str());
         char c = judge_pause();
         if (c == 'q') {
             exit(0);
@@ -61,7 +71,7 @@ void create_data() {
     printf("preparing...\n");
     printf("\ntesting...\n\n");
     register_signal();
-    for (int i = 1; i <= T; i++) {
+    for (int i = 1; i <= amount; i++) {
         system("clear");
         long long  a_time, b_time, s_time, t_time;
         printf(NONE"Test #%d\n", i);

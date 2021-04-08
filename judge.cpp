@@ -25,35 +25,48 @@ char answer_pause() {
 }
 
 void normal_judge() {
+    string T, gen, src1, src2, prob, file, timelimit;
+    int amount, time_limit;
+#define getconfig(x) x = config[#x]
+    getconfig(T), amount = stoi(T);
+    getconfig(gen);
+    getconfig(src1);
+    getconfig(src2);
+    getconfig(prob);
+    getconfig(timelimit), time_limit = stoi(timelimit);
+#undef  getconfig
     judge:
     file = data_dir + prob + "/";
     if (run("rm -rf ./" + file)) bash_fail();
     if (run("mkdir " + file)) bash_fail();
-    string dataprogram = file + "data";
-    string outprogram = file + "out";
-    string ansprogram = file + "ans";
+    string gen_name = "gen";
+    string out_name = "out";
+    string ans_name = "ans";
+    string gen_exec = file + gen_name;
+    string out_exec = file + out_name;
+    string ans_exec = file + ans_name;
     int gccret = 0;
-    printf("compiling \"%s\" ...\n", dtm.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE " + dtm + " -o " + dataprogram);
+    printf("compiling \"%s\" ...\n", gen.c_str());
+    gccret = run("g++ -DLOCAL_JUDGE " + gen + " -o " + gen_exec);
     int compile_error = 0;
     if (WEXITSTATUS(gccret)) {
         compile_error += 1;
     }
-    printf("compiling \"%s\" ...\n", sc1.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE " + sc1 + " -o " + outprogram);
+    printf("compiling \"%s\" ...\n", src1.c_str());
+    gccret = run("g++ -DLOCAL_JUDGE " + src1 + " -o " + out_exec);
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
-    printf("compiling \"%s\" ...\n", sc2.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE " + sc2 + " -o " + ansprogram);
+    printf("compiling \"%s\" ...\n", src2.c_str());
+    gccret = run("g++ -DLOCAL_JUDGE " + src2 + " -o " + ans_exec);
     if (WEXITSTATUS(gccret)) {
         compile_error += 4;
     }
     if (compile_error) {
         printf("\n");
-        if (compile_error & 1) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, dtm.c_str());
-        if (compile_error & 2) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, sc1.c_str());
-        if (compile_error & 4) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, sc2.c_str());
+        if (compile_error & 1) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, gen.c_str());
+        if (compile_error & 2) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, src1.c_str());
+        if (compile_error & 4) printf(YELLOW"Compile Error at \"%s\" .\n" NONE, src2.c_str());
         char c = judge_pause();
         if (c == 'q') {
             exit(0);
@@ -61,17 +74,26 @@ void normal_judge() {
             goto judge;
         }
     }
-    while (access(dataprogram.c_str(), F_OK) != 0) {
-        printf(NONE L_RED"\nError: no executable generator.\n" NONE);
-        do dataprogram = readline("input generator: "); while (dataprogram == "");
+    if (access(gen_exec.c_str(), F_OK) != 0) {
+        while (access(gen_exec.c_str(), F_OK) != 0) {
+            printf(NONE L_RED"\nError: no executable generator.\n" NONE);
+            do gen_exec = readline("input generator: "); while (gen_exec == "");
+        }
+        run("cp " + gen_exec + " " + file + gen_name);
     }
-    while (access(outprogram.c_str(), F_OK) != 0) {
-        printf(NONE L_RED"\nError: no executable testprogram.\n" NONE);
-        do outprogram = readline("input testprogram: "); while (outprogram == "");
+    if (access(out_exec.c_str(), F_OK) != 0) {
+        while (access(out_exec.c_str(), F_OK) != 0) {
+            printf(NONE L_RED"\nError: no executable testprogram.\n" NONE);
+            do out_exec = readline("input testprogram: "); while (out_exec == "");
+        }
+        run("cp " + out_exec + " " + file + out_name);
     }
-    while (access(ansprogram.c_str(), F_OK) != 0) {
-        printf(NONE L_RED"\nError: no executable stdprogram.\n" NONE);
-        do ansprogram = readline("input std: "); while (ansprogram == "");
+    if (access(ans_exec.c_str(), F_OK) != 0) {
+        while (access(ans_exec.c_str(), F_OK) != 0) {
+            printf(NONE L_RED"\nError: no executable stdprogram.\n" NONE);
+            do ans_exec = readline("input std: "); while (ans_exec == "");
+        }
+        run("cp " + ans_exec + " " + file + ans_name);
     }
     printf("preparing...\n");
     printf("\ntesting...\n\n");
@@ -79,7 +101,7 @@ void normal_judge() {
     string anstot = file + "totalans.log";
     string res = file + "result.log";
     register_signal();
-    for (int i = 1; i <= T; i++) {
+    for (int i = 1; i <= amount; i++) {
         system("clear");
         long long  a_time, b_time, s_time, t_time;
         printf(NONE"Test #%d\n", i);
@@ -96,15 +118,16 @@ void normal_judge() {
             out = out_with_id;
             ans = ans_with_id;
         }
-        string runtime_in = file + prob + ".in ";
-        string runtime_out = file + prob + ".in ";
-        printf(GRAY"in:  %s( %s)\n" NONE, in.c_str(), runtime_in.c_str());
-        printf(GRAY"out: %s( %s)\n" NONE, out.c_str(), runtime_out.c_str());
-        printf(GRAY"ans: %s( %s)\n" NONE, ans.c_str(), runtime_out.c_str());
-        printf(HIDE"\n");
+        string runtime_in = prob + ".in ";
+        string runtime_out = prob + ".out ";
+        printf(GRAY"in:  %s  (%s.in)\n" NONE, in.c_str(), prob.c_str());
+        printf(GRAY"out: %s (%s.out)\n" NONE, out.c_str(), prob.c_str());
+        printf(GRAY"ans: %s (%s.out)\n" NONE, ans.c_str(), prob.c_str());
+        run("echo \"\" > " + out);
+        run("echo \"\" > " + ans);
         int errorflag = 0;
         int ret;
-        if (access(dataprogram.c_str(), F_OK) != 0) {
+        if (access(gen_exec.c_str(), F_OK) != 0) {
             printf(NONE L_RED"Error: no executable generator.\n" NONE);
             if ((int)global_result.length() == i - 1) {
                 global_result += 'e';
@@ -122,7 +145,8 @@ void normal_judge() {
             }
         }
         s_time = myclock();
-        ret = run("./" + dataprogram + " 1> " + in + " 2> /dev/null");
+        ret = run("cd " + file + " && ./" + gen_name + " > " + runtime_in + "cd ../../");
+        run("cp " + file + runtime_in + in);
         if (WEXITSTATUS(ret) != 0) {
             delline();
             puts(NONE L_PURPLE "Error: generator failed." NONE);
@@ -141,7 +165,7 @@ void normal_judge() {
                 goto judge;
             }
         }
-        if (access(outprogram.c_str(), F_OK) != 0) {
+        if (access(out_exec.c_str(), F_OK) != 0) {
             printf(NONE L_RED"Error: no executable program.\n" NONE);
             if ((int)global_result.length() == i - 1) {
                 global_result += 'e';
@@ -158,11 +182,12 @@ void normal_judge() {
                 goto judge;
             }
         }
-        run("cp " + in + runtime_in);
+        run("cp " + in + file + runtime_in);
+        printf(HIDE "\n");
         a_time = myclock();
-        ret = run("./" + outprogram + " < " + runtime_in + " 1> " + runtime_out + " 2> /dev/null");
+        ret = run("cd " + file + " && ./" + out_name + " < " + runtime_in + " > " + runtime_out + "cd ../../");
         b_time = myclock();
-        run("cp " + runtime_out + out);
+        run("cp " + file + runtime_out + out);
         int time1 = b_time - a_time;
         if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE "Runtime Error!" NONE);
@@ -173,7 +198,7 @@ void normal_judge() {
         }
         if (errorflag == 1) printf(NONE"time1: %lldms (return %d)", b_time - a_time, WEXITSTATUS(ret));
         else printf(NONE"time1: %lldms", b_time - a_time);
-        if (access(ansprogram.c_str(), F_OK) != 0) {
+        if (access(ans_exec.c_str(), F_OK) != 0) {
             printf(NONE L_RED"\n\nError: no executable program.\n" NONE);
             if ((int)global_result.length() == i - 1) {
                 global_result += 'e';
@@ -190,12 +215,12 @@ void normal_judge() {
                 goto judge;
             }
         }
-        printf(HIDE"\n");
-        run("cp " + in + runtime_in);
+        run("cp " + in + file + runtime_in);
+        printf(HIDE "\n");
         a_time = myclock();
-        ret = run("./" + ansprogram + " < " + runtime_in + " 1> " + runtime_out + " 2> /dev/null");
+        ret = run("cd " + file + " && ./" + ans_name + " < " + runtime_in + " > " + runtime_out + "cd ../../");
         b_time = myclock();
-        run("cp " + runtime_out + ans);
+        run("cp " + file + runtime_out + ans);
         if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE"Runtime Error!" NONE);
             errorflag = 2;
@@ -237,7 +262,7 @@ void normal_judge() {
                 goto err342;
             }
         }
-        if (time1 > timelimit || time2 > timelimit) {
+        if (time1 > time_limit || time2 > time_limit) {
             puts(L_BLUE"\nTime Limit Exceeded!" NONE);
             errorflag = 1;
             if ((int)global_result.length() == i - 1) {

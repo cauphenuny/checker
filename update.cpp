@@ -11,22 +11,18 @@ void normal_exit(int signum) {
 }
 
 void auto_update() {
-    //run("/tmp/checker/update/auto_update.sh " + branch);
 }
 
 void start_update() {
-    //signal(SIGTERM, normal_exit);
-    //atexit(auto_update);
     exit(0);
 }
 
 void forced_update() {
     run("/tmp/checker/update/update.sh " + branch);
-    exit(0);
 }
 
 void start_forced_update() {
-    signal(SIGTERM, normal_exit);
+    //signal(SIGTERM, normal_exit);
     atexit(forced_update);
     exit(0);
 }
