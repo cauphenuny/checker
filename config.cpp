@@ -12,7 +12,7 @@ void store_data(map<string, string> config) {
     std::string file = config_dir + config["prob"];
     //std::string file = config_dir + prob + ".cfg";
     ofstream filestream(file.c_str());
-    filestream << "config_version" << " = " << config_version << endl;
+    filestream << "config_version" << ": " << config_version << endl;
     for (auto it : config) {
         filestream << it.first << " = " << it.second << endl;
     }

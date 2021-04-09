@@ -15,7 +15,7 @@ using namespace std;
     std::string readline(std::string prompt) {
         printf("%s", prompt.c_str());
         std::string res;
-        std::cin >> res;
+        getline(cin, res);
         return res;
     }
 #endif

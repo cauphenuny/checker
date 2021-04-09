@@ -70,15 +70,14 @@ int main(int argc, char *argv[]) {
     }
     if (flag) {
         //system("clear");
-        printf("amount of detection: ");
-        cin >> T;
+        T = "1000000";
         if (general_mode == 1) {
-            do gen = readline("name of generator: "); while (gen == "");
-            do src1 = readline("name of source1: "); while (src1 == "");
-            do src2 = readline("name of source2: "); while (src2 == "");
+            do gen = readline("generator (*.cpp): "); while (gen == "");
+            do src1 = readline("source1 (*.cpp): "); while (src1 == "");
+            do src2 = readline("source2 (*.cpp): "); while (src2 == "");
         } else {
-            do gen = readline("name of generator: "); while (gen == "");
-            do src1 = readline("name of std: "); while (src1 == "");
+            do gen = readline("generator (*.cpp): "); while (gen == "");
+            do src1 = readline("std (*.cpp): "); while (src1 == "");
             src2 = src1;
         }
         printf("time limit (ms): ");
