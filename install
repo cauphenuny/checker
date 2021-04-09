@@ -9,6 +9,11 @@ if [ ! $(command -v make) ]; then
     exit 1
 fi
 
+if [ ! $(command -v g++) ]; then
+    echo "please install make"
+    exit 1
+fi
+
 if [ ! $(command -v vim) ]; then
     echo "please install vim"
     exit 1
