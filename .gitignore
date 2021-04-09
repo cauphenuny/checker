@@ -1,6 +1,6 @@
 # ignore .git
 .git/
 *.o
+*.sh
 checker
-upload.sh
 
