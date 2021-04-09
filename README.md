@@ -1,10 +1,9 @@
 # Checker
-A useful and convenient checker for OI, **developing branch**, new and experimental.
+A useful and convenient checker for OI
 
 ## Install
 ```bash
 ./install
-checker -v
 ```
 
 ## Usage:

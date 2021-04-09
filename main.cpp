@@ -7,7 +7,7 @@
 using namespace std;
 
 string version = UNDERLINE "checker v5.9.4" NONE;
-string branch = "dev";
+string branch = "master";
 const string config_dir = ".config/";
 const string data_dir = ".data/";
 
