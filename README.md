@@ -3,6 +3,8 @@ A useful and convenient checker for OI
 
 ## Install
 ```bash
+git clone https://github.com/ycpedef/checker --depth=1
+cd checker
 ./install
 ```
 
