@@ -44,7 +44,7 @@ cd /tmp/checker/source/ && \
 echo -e "\e[32m[compile] ...\e[0m" && \
 make $1 && \
 echo -e "\e[32m[create link] ...\e[0m" && \
-sudo cp ./checker /usr/local/bin/checker
+sudo cp ./checker /usr/local/bin/checker && \
 sudo chmod 777 /usr/local/bin/checker && \
 
 ret=$?

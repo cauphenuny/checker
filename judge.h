@@ -11,6 +11,7 @@
 
 using std::string;
 using std::map;
+using std::__cxx11::to_string;
 
 #ifndef COMPATIBLE
 #   include <readline/history.h>
