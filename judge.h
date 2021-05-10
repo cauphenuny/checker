@@ -14,8 +14,8 @@ using std::map;
 using std::__cxx11::to_string;
 
 #ifndef COMPATIBLE
-#   include <readline/history.h>
-#   include <readline/readline.h>
+#   include "readline/history.h"
+#   include "readline/readline.h"
 #else
     extern string readline(string prompt);
 #endif
