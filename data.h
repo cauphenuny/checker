@@ -13,8 +13,8 @@ using std::string;
 using std::map;
 
 #ifndef COMPATIBLE
-#   include <readline/history.h>
-#   include <readline/readline.h>
+#   include "readline/history.h"
+#   include "readline/readline.h"
 #else
     extern std::string readline(std::string prompt);
 #endif
