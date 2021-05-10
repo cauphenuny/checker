@@ -61,7 +61,15 @@ void edit_configure(string prob) {
     }
 }
 
-bool analysis_key_value(string src, string &key, string &value, int pos = 0) {
+bool analysis_key_value(string src, string &key, string &value) {
+    int pos = 0;
+    key = getword(src, pos);
+    while (!isword(src[pos]) && pos < (int)src.length() - 1) pos++;
+    value = getword(src, pos);
+    return 0;
+}
+
+bool analysis_key_value(string src, string &key, string &value, int &pos) {
     key = getword(src, pos);
     while (!isword(src[pos]) && pos < (int)src.length() - 1) pos++;
     value = getword(src, pos);

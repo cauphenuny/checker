@@ -40,4 +40,4 @@ extern const std::string config_dir;
 extern const std::string data_dir;
 
 //command.cpp
-extern bool analysis_key_value(string, string &key, string &value, int = 0);
+extern bool analysis_key_value(string, string &key, string &value);
