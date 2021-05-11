@@ -45,7 +45,7 @@ void create_data() {
         compile_error += 1;
     }
     printf("compiling \"%s\" ...\n", src1.c_str());
-    gccret = run("g++ -DLOCAL_JUDGE" + src1 + " -o " + ansprogram);
+    gccret = run("g++ -DLOCAL_JUDGE " + src1 + " -o " + ansprogram);
     if (WEXITSTATUS(gccret)) {
         compile_error += 2;
     }
@@ -131,6 +131,7 @@ void create_data() {
         b_time = myclock();
         if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE"Runtime Error!" NONE);
+        cerr << NONE << "./" + ansprogram + " < " + in + " 1> " + ans + " 2> /dev/null" << HIDE << endl; 
             errorflag = 2;
             if ((int)global_result.length() == i - 1) {
                 global_result += 'r';
