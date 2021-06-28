@@ -19,8 +19,7 @@ void usage(int id) {
     puts("       always           always save input and output file");
     puts("       never            never save file\n");
     puts("--branch=master         default branch");
-    puts("         dev            developing branch, new and experimental");
-    puts("         compatible     compatible branch, for older OS, without GNU-readline\n");
+    puts("         dev            developing branch, new and experimental\n");
     puts("--mode=normal           normal mode(default)");
     puts("       data             data mode\n");
     puts("--config:$problem_name  change problem config directly by vim\n");
