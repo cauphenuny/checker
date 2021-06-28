@@ -126,7 +126,7 @@ void normal_judge() {
         run("echo \"\" > " + out);
         run("echo \"\" > " + ans);
         int errorflag = 0;
-        int ret, tle_flag = 0;
+        int ret, tle_flag1 = 0, tle_flag2 = 0, tle_flag;
         if (access(gen_exec.c_str(), F_OK) != 0) {
             printf(NONE L_RED"Error: no executable generator.\n" NONE);
             if ((int)global_result.length() == i - 1) {
@@ -189,7 +189,7 @@ void normal_judge() {
         b_time = myclock();
         run("cp " + file + runtime_out + out);
         int time1 = b_time - a_time;
-        if (WEXITSTATUS(ret) == 124) tle_flag = 1;
+        if (WEXITSTATUS(ret) == 124) tle_flag1 = 1;
         else if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE "Runtime Error!" NONE);
             if ((int)global_result.length() == i - 1) {
@@ -197,9 +197,8 @@ void normal_judge() {
             }
             errorflag = 1;
         }
-        if (time1 > time_limit) tle_flag = 1;
-        if (tle_flag) printf(NONE"timeout.");
-        else if (errorflag == 1) printf(NONE"time1: %dms (return %d)", time1, WEXITSTATUS(ret));
+        if (time1 > time_limit) tle_flag1 = 1;
+        if (errorflag == 1) printf(NONE"time1: %dms (return %d)", time1, WEXITSTATUS(ret));
         else printf(NONE"time1: %dms", time1);
         if (access(ans_exec.c_str(), F_OK) != 0) {
             printf(NONE L_RED"\n\nError: no executable program.\n" NONE);
@@ -224,7 +223,8 @@ void normal_judge() {
         ret = run("cd " + file + " && timeout " + to_string((double)time_limit / 1000) + " ./" + ans_name + " < " + runtime_in + " > " + runtime_out + "cd ../../");
         b_time = myclock();
         run("cp " + file + runtime_out + ans);
-        if (WEXITSTATUS(ret) == 124) tle_flag = 1;
+        tle_flag2 = 0;
+        if (WEXITSTATUS(ret) == 124) tle_flag2 = 1;
         else if (WEXITSTATUS(ret) != 0) {
             puts(NONE L_PURPLE"Runtime Error!" NONE);
             errorflag = 2;
@@ -233,9 +233,8 @@ void normal_judge() {
             }
         }
         int time2 = b_time - a_time;
-        if (time2 > time_limit) tle_flag = 1;
-        if (tle_flag) printf(NONE"timeout.");
-        else if (errorflag == 2) printf(NONE"time2: %dms (return %d)\n", time2, WEXITSTATUS(ret));
+        if (time2 > time_limit) tle_flag2 = 1;
+        if (errorflag == 2) printf(NONE"time2: %dms (return %d)\n", time2, WEXITSTATUS(ret));
         else printf(NONE"\n" NONE"time2: %dms\n", time2);
         if (errorflag) {
             if (save_mode == 2) {
@@ -267,6 +266,7 @@ void normal_judge() {
                 goto err342;
             }
         }
+        tle_flag = tle_flag1 | tle_flag2;
         if (tle_flag) {
             puts(L_BLUE"\nTime Limit Exceeded!" NONE);
             errorflag = 1;

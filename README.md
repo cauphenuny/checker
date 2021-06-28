@@ -3,7 +3,7 @@ A useful and convenient checker for OI
 
 ## Install
 ```bash
-git clone https://github.com/ycpedef/checker --depth=1
+git clone https://github.com/starseekist/checker --depth=1
 cd checker
 ./install
 ```
@@ -34,3 +34,5 @@ v5.11 鉴于大部分人的电脑没有readline库，砍掉了自动补全
 g++ -DLOCAL_JUDGE $.cpp -o $
 ```
 
+---
+这个代码奇丑无比，充斥着不明所以的缩写和奇怪的实现逻辑 ~~所以有bug不要找我，我也看不懂~~

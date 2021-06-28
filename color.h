@@ -22,4 +22,3 @@
 #define CLEAR                "\e[2J"
 #define CLRLINE              "\r\e[K"
 #define NONE                 "\e[0m"
-
