@@ -8,17 +8,12 @@ using namespace std;
 
 //#define COMPATIBLE
 
-#ifndef COMPATIBLE
-#   include "readline/history.h"
-#   include "readline/readline.h"
-#else
-    std::string readline(std::string prompt) {
-        printf("%s", prompt.c_str());
-        std::string res;
-        getline(cin, res);
-        return res;
-    }
-#endif
+std::string readline(std::string prompt) {
+    printf("%s", prompt.c_str());
+    std::string res;
+    getline(cin, res);
+    return res;
+}
 
 bool isdir(string filename) {
     struct stat s_buf;

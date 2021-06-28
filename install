@@ -48,7 +48,7 @@ sudo cp ./checker /usr/local/bin/checker && \
 sudo chmod 777 /usr/local/bin/checker && \
 
 ret=$?
-if [ $ret != 0 ]; then
-    echo -e "\n\e[31mshell return $ret, failed.\e[0m"
+if [ "$ret" != "0" ]; then
+    echo -e "\n\e[31terminated.\e[0m"
 fi
 exit $ret

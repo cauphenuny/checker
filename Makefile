@@ -4,7 +4,7 @@ target = checker
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
 CPPFLAGS = 
-LDFLAGS = -lreadline
+LDFLAGS = 
 
 %.o: %.cpp %.h
 	$(CXX) -c $< -o $@ $(CXXFLAGS) $(CPPFLAGS)
