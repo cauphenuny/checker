@@ -28,9 +28,9 @@ mkdir -p /tmp/checker/buffer && \
 
 echo -e "\e[32m[download file] ...\e[0m" && \
 cd /tmp/checker/buffer && \
-wget https://gitee.com/yuanchenpu/checker/repository/archive/$1.zip && \
+wget https://github.com/starseekist/checker/archive/refs/heads/$1.zip -O $1.zip && \
 unzip $1.zip && \
-cd checker/ && \
+cd checker-master/ && \
 cp -r ./ /tmp/checker/source && \
 
 echo -e "\e[32m[compile] ...\e[0m" && \
