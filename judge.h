@@ -11,7 +11,7 @@
 
 using std::string;
 using std::map;
-using std::__cxx11::to_string;
+using std::to_string;
 
 extern string readline(string prompt);
 
