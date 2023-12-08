@@ -19,6 +19,9 @@ clean:
 
 rebuild: clean $(target)
 
+run: $(target)
+    ./checker
+
 all: $(target)
 
 install:
