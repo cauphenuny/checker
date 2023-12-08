@@ -20,7 +20,7 @@ clean:
 rebuild: clean $(target)
 
 run: $(target)
-    ./checker
+	./$(target)
 
 all: $(target)
 
